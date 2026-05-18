@@ -1,0 +1,152 @@
+<?xml version=""1.0"" encoding=""UTF-8""?>
+<jasperReport xmlns="" http://jasperreports.sourceforge.net/jasperreports""
+        xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+        xsi:schemaLocation=""http://jasperreports.sourceforge.net/jasperreports
+        http://jasperreports.sourceforge.net/xsd/jasperreport.xsd""
+        name=""invoice""
+        pageWidth=""595"" pageHeight=""842""
+        columnWidth=""535"" leftMargin=""30"" rightMargin=""30""
+        topMargin=""20"" bottomMargin=""20""
+        whenNoDataType=""AllSectionsNoDetail"">
+
+        <!-- ── Parameters ───────────────────────────────────────────── -->
+<parameter name="" invoiceNumber"" class=""java.lang.String""/>
+<parameter name="" customerName""  class=""java.lang.String""/>
+<parameter name="" LOGO_PATH""     class=""java.lang.String""/>
+<parameter name="" grandTotal""    class=""java.math.BigDecimal""/>
+
+        <!-- ── Data source fields (from List<Map<String,Object>>) ────── -->
+<field name="" productName"" class=""java.lang.String""/>
+<field name="" unitPrice""   class=""java.math.BigDecimal""/>
+<field name="" quantity""    class=""java.lang.Integer""/>
+<field name="" totalPrice""  class=""java.math.BigDecimal""/>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!--  TITLE BAND                                               -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+<title>
+<band height=""80"" splitType=""Stretch"">
+
+<!-- Logo – top right -->
+<image scaleImage="" RetainShape"" hAlign=""Right"" vAlign=""Middle"">
+<reportElement x=""385"" y=""5"" width=""150"" height=""60""/>
+<imageExpression><![CDATA[$P{LOGO_PATH}]]></imageExpression>
+</image>
+
+        <!-- Invoice title – top left -->
+<textField>
+<reportElement x=""0"" y=""5"" width=""380"" height=""30""/>
+<textElement>
+    <font size=""18"" isBold=""true""/>
+</textElement>
+<textFieldExpression>
+    <![CDATA[""Invoice n° "" + $P{invoiceNumber}]]>
+</textFieldExpression>
+</textField>
+
+        <!-- Customer name -->
+<textField>
+<reportElement x=""0"" y=""45"" width=""380"" height=""25""/>
+<textElement><font size=""12""/>
+</textElement>
+<textFieldExpression>
+    <![CDATA[""Customer: "" + $P{customerName}]]>
+</textFieldExpression>
+</textField>
+        </band>
+        </title>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!--  COLUMN HEADER                                            -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+<columnHeader>
+<band height=""25"">
+<rectangle>
+    <reportElement x=""0"" y=""0"" width=""535"" height=""25"" backcolor=""#3A3A3A"" mode=""Opaque""/>
+</rectangle>
+<staticText>
+    <reportElement x=""5"" y=""4"" width=""220"" height=""17"" forecolor=""#FFFFFF""/>
+    <textElement><font isBold="" true""/>
+    </textElement>
+    <text><![CDATA[Product]]></text>
+</staticText>
+<staticText>
+    <reportElement x=""230"" y=""4"" width=""90"" height=""17"" forecolor=""#FFFFFF""/>
+    <textElement textAlignment="" Right""><font isBold="" true""/>
+</textElement>
+<text><![CDATA[Unit Price]]></text>
+</staticText>
+<staticText>
+<reportElement x=""330"" y=""4"" width=""70"" height=""17"" forecolor=""#FFFFFF""/>
+<textElement textAlignment="" Center""><font isBold="" true""/>
+</textElement>
+<text><![CDATA[Qty]]></text>
+        </staticText>
+<staticText>
+<reportElement x=""405"" y=""4"" width=""125"" height=""17"" forecolor=""#FFFFFF""/>
+<textElement textAlignment="" Right""><font isBold="" true""/>
+</textElement>
+<text><![CDATA[Total]]></text>
+        </staticText>
+        </band>
+        </columnHeader>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!--  DETAIL (one row per product)                             -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+<detail>
+<band height=""22"" splitType=""Stretch"">
+<!-- Alternating row colour via a rectangle -->
+<rectangle>
+    <reportElement x=""0"" y=""0"" width=""535"" height=""22""
+    backcolor=""#F2F2F2"" mode=""Opaque""
+    printWhenExpression=""$V{REPORT_COUNT} % 2 == 0""/>
+</rectangle>
+
+<textField>
+    <reportElement x=""5"" y=""3"" width=""220"" height=""16""/>
+    <textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+</textField>
+<textField pattern=""#,##0.00"">
+<reportElement x=""230"" y=""3"" width=""90"" height=""16""/>
+<textElement textAlignment="" Right""/>
+<textFieldExpression><![CDATA[$F{unitPrice}]]></textFieldExpression>
+</textField>
+<textField>
+<reportElement x=""330"" y=""3"" width=""70"" height=""16""/>
+<textElement textAlignment="" Center""/>
+<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+</textField>
+<textField pattern=""#,##0.00"">
+<reportElement x=""405"" y=""3"" width=""125"" height=""16""/>
+<textElement textAlignment="" Right""/>
+<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+        </textField>
+        </band>
+        </detail>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!--  SUMMARY – grand total                                    -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+<summary>
+<band height=""40"">
+<line>
+    <reportElement x=""0"" y=""5"" width=""535"" height=""1""/>
+    <graphicElement><pen lineWidth=""1.5""/>
+    </graphicElement>
+</line>
+<staticText>
+    <reportElement x=""300"" y=""12"" width=""100"" height=""20""/>
+    <textElement textAlignment="" Right""><font size=""12"" isBold=""true""/>
+</textElement>
+<text><![CDATA[Grand Total:]]></text>
+</staticText>
+<textField pattern=""#,##0.00"">
+<reportElement x=""405"" y=""12"" width=""125"" height=""20""/>
+<textElement textAlignment="" Right""><font size=""12"" isBold=""true""/></textElement>
+<textFieldExpression><![CDATA[$P{grandTotal}]]></textFieldExpression>
+        </textField>
+        </band>
+        </summary>
+
+        </jasperReport>
