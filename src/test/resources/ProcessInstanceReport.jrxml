@@ -1,5 +1,7 @@
 <!-- Created with Jaspersoft Studio version 7.0.6.final using JasperReports Library version 7.0.6-5d2a603fdc6b3db8f842a83383e594f41891534d  -->
-<jasperReport name="ProcessInstanceReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+<jasperReport name="ProcessInstanceReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535"
+              leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+              uuid="ced95029-b569-4027-895c-af2843a4e088">
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
     <style name="Title" fontName="Times New Roman" fontSize="50.0" bold="true"/>
     <style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18.0"/>
@@ -18,10 +20,12 @@
         <element kind="image" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1" x="0" y="0" width="164" height="126">
             <expression><![CDATA["coffee.jpg"]]></expression>
         </element>
-        <element kind="staticText" uuid="1a652692-054a-40f3-ade5-68d8da36626d" x="170" y="0" width="390" height="62" fontSize="30.0" vTextAlign="Middle" style="Title">
+        <element kind="staticText" uuid="1a652692-054a-40f3-ade5-68d8da36626d" x="170" y="0" width="390" height="62"
+                 fontSize="30.0" vTextAlign="Middle" style="Title">
             <text><![CDATA[Process Instance Report]]></text>
         </element>
-        <element kind="staticText" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f" x="172" y="94" width="383" height="42" fontSize="10.0" hTextAlign="Right">
+        <element kind="staticText" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f" x="172" y="94" width="383" height="42"
+                 fontSize="10.0" hTextAlign="Right">
             <text><![CDATA[Information about the process instance]]></text>
         </element>
         <element kind="image" uuid="5d64e5b3-07bb-48ab-89dc-15c0c46bb19a" x="433" y="-115" width="267" height="209">
@@ -30,20 +34,25 @@
     </title>
     <pageHeader splitType="Stretch"/>
     <columnHeader height="16" splitType="Stretch">
-        <element kind="line" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1">
+        <element kind="line" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93" positionType="FixRelativeToBottom" x="0" y="15"
+                 width="555" height="1">
             <pen lineWidth="0.5" lineColor="#999999"/>
         </element>
     </columnHeader>
     <detail>
         <band height="192" splitType="Stretch">
-            <element kind="frame" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766" mode="Opaque" x="0" y="-20" width="555" height="75" style="Row">
-                <element kind="textField" uuid="21f30964-7017-45a3-a98e-6908a81bb153" x="160" y="10" width="100" height="20">
+            <element kind="frame" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766" mode="Opaque" x="0" y="-20" width="555"
+                     height="75" style="Row">
+                <element kind="textField" uuid="21f30964-7017-45a3-a98e-6908a81bb153" x="160" y="10" width="100"
+                         height="20">
                     <expression><![CDATA[$P{context.processInstanceKey}]]></expression>
                 </element>
-                <element kind="staticText" uuid="26dfee6e-2e70-45f2-b4fa-2007f09989c1" x="20" y="10" width="100" height="20">
+                <element kind="staticText" uuid="26dfee6e-2e70-45f2-b4fa-2007f09989c1" x="20" y="10" width="100"
+                         height="20">
                     <text><![CDATA[Process instance key :]]></text>
                 </element>
-                <element kind="staticText" uuid="f66736a6-ce8d-4188-b638-8811140ed989" x="453" y="5" width="100" height="15" fontSize="6.0" italic="true">
+                <element kind="staticText" uuid="f66736a6-ce8d-4188-b638-8811140ed989" x="453" y="5" width="100"
+                         height="15" fontSize="6.0" italic="true">
                     <text><![CDATA[Context]]></text>
                 </element>
                 <box style="Row">
@@ -53,14 +62,17 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
             </element>
-            <element kind="frame" uuid="25941e30-c69e-47c8-b4c5-6e3bf1dc3ee4" x="10" y="70" width="543" height="193">
-                <element kind="staticText" uuid="921dec64-fdf5-4b54-a595-3e041f0de114" x="453" y="5" width="100" height="15" fontSize="6.0" italic="true">
+            <element kind="frame" uuid="25941e30-c69e-47c8-b4c5-6e3bf1dc3ee4" x="10" y="70" width="543" height="122">
+                <element kind="staticText" uuid="921dec64-fdf5-4b54-a595-3e041f0de114" x="453" y="5" width="90"
+                         height="15" fontSize="6.0" italic="true">
                     <text><![CDATA[Variables]]></text>
                 </element>
-                <element kind="staticText" uuid="28d48eb5-ec04-4ffa-b669-421cba857fdd" x="20" y="10" width="100" height="20">
+                <element kind="staticText" uuid="28d48eb5-ec04-4ffa-b669-421cba857fdd" x="20" y="10" width="100"
+                         height="20">
                     <text><![CDATA[Customer Name:]]></text>
                 </element>
-                <element kind="textField" uuid="6194b18a-3bd0-45fd-84ac-39ea1ee29a73" x="160" y="10" width="100" height="20">
+                <element kind="textField" uuid="6194b18a-3bd0-45fd-84ac-39ea1ee29a73" x="160" y="10" width="100"
+                         height="20">
                     <expression><![CDATA[$P{variables.customerName}]]></expression>
                 </element>
                 <box>
@@ -73,19 +85,27 @@
         </band>
     </detail>
     <columnFooter height="45" splitType="Stretch">
-        <element kind="line" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+        <element kind="line" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c" positionType="FixRelativeToBottom" x="0" y="3"
+                 width="555" height="1">
             <pen lineWidth="0.5" lineColor="#999999"/>
         </element>
     </columnFooter>
     <pageFooter height="25" splitType="Stretch">
-        <element kind="frame" uuid="183682bc-d976-4756-83e0-6625a3f98ed1" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
-            <element kind="textField" uuid="0193f9b3-1559-491a-8580-b6988863b6a1" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+        <element kind="frame" uuid="183682bc-d976-4756-83e0-6625a3f98ed1" mode="Opaque" x="-21" y="1" width="597"
+                 height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
+            <element kind="textField" uuid="0193f9b3-1559-491a-8580-b6988863b6a1" x="533" y="0" width="40" height="20"
+                     forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle"
+                     style="Column header">
                 <expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
             </element>
-            <element kind="textField" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+            <element kind="textField" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0" x="453" y="0" width="80" height="20"
+                     forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle"
+                     style="Column header">
                 <expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
             </element>
-            <element kind="textField" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+            <element kind="textField" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae" x="22" y="1" width="197" height="20"
+                     forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle"
+                     style="Column header">
                 <expression><![CDATA[new java.util.Date()]]></expression>
             </element>
         </element>
