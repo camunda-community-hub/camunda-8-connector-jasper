@@ -25,10 +25,10 @@
         <zeebe:taskDefinition type="c-jasper-function" />
         <zeebe:ioMapping>
           <zeebe:input source="=customerInfo" target="parameters" />
-          <zeebe:input source="={ &#34;storageDefinition&#34;: &#34;URL&#34;, &#34;content&#34;: &#34;https://github.com/camunda-community-hub/camunda-8-connector-jasper/raw/main/src/test/resources/ProcessInstanceReport.jrxml&#34;}" target="jasperReportUrl" />
+          <zeebe:input source="={ &#34;storageDefinition&#34;: &#34;URL&#34;, &#34;content&#34;: &#34;https://github.com/camunda-community-hub/camunda-8-connector-jasper/raw/main/src/test/resources/ProcessInstanceReport.jrxml&#34;}" target="jasperReport" />
           <zeebe:input source="=&#34;ProcessInstanceReport.pdf&#34;" target="destinationFileName" />
           <zeebe:input source="={ &#34;type&#34;: &#34;CAMUNDA&#34;}" target="destinationJsonStorageDefinition" />
-          <zeebe:input source="={ &#34;storageDefinition&#34;: &#34;FOLDER:c:/dev/intellij/community/connector/camunda-8-connector-jasper/src/test/resources&#34;, &#10;  &#34;content&#34;: &#34;ProcessInstanceReport.jrxml&#34;}" target="jasperReport" />
+          <zeebe:input source="={ &#34;storageDefinition&#34;: &#34;FOLDER:c:/dev/intellij/community/connector/camunda-8-connector-jasper/src/test/resources&#34;, &#10;  &#34;content&#34;: &#34;ProcessInstanceReport.jrxml&#34;}" target="jasperReportLocal" />
           <zeebe:input source="=&#34;PDF&#34;" target="formatExport" />
           <zeebe:output source="= result.destinationFile" target="processInstanceReportFileStorage" />
           <zeebe:output source="= [result.destinationFile.camundaReference]" target="processInstanceReportHistory" />
