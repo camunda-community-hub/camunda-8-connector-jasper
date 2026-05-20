@@ -123,7 +123,7 @@ public class RunnerParameter {
      * @param parameterLabel label to display in the template
      * @param level          level for this parameter
      * @param explanation    describe the usage of the parameter
-     * @param gsonTemplate   Give an example of the format, to verify that the parameters meet the
+     * @param gsonTemplate   Give an example of the FORMAT, to verify that the parameters meet the
      *                       requirement. Format is <Parameter>:<Class>/Example {"host":"String", "Port": "Integer"}
      * @return a runnerParameter from parameters
      */

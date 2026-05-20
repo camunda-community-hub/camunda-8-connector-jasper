@@ -1,114 +1,151 @@
 <!-- Created with Jaspersoft Studio version 7.0.6.final using JasperReports Library version 7.0.6-5d2a603fdc6b3db8f842a83383e594f41891534d  -->
-<jasperReport name="ProcessInstanceReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535"
-              leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
-              uuid="ced95029-b569-4027-895c-af2843a4e088">
-    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
-    <style name="Title" fontName="Times New Roman" fontSize="50.0" bold="true"/>
-    <style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18.0"/>
-    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12.0" bold="true"/>
-    <style name="Detail" fontName="Arial" fontSize="12.0"/>
-    <style name="Row" mode="Transparent">
-        <conditionalStyle backcolor="#E6DAC3">
-            <conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
-        </conditionalStyle>
-    </style>
-    <parameter name="variables.customerName" class="java.lang.String"/>
-    <parameter name="context.processInstanceKey" class="java.lang.String"/>
-    <query language="json"><![CDATA[context.processInstanceKey]]></query>
-    <background splitType="Stretch"/>
-    <title height="136" splitType="Stretch">
-        <element kind="image" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1" x="0" y="0" width="164" height="126">
-            <expression><![CDATA["coffee.jpg"]]></expression>
-        </element>
-        <element kind="staticText" uuid="1a652692-054a-40f3-ade5-68d8da36626d" x="170" y="0" width="390" height="62"
-                 fontSize="30.0" vTextAlign="Middle" style="Title">
-            <text><![CDATA[Process Instance Report]]></text>
-        </element>
-        <element kind="staticText" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f" x="172" y="94" width="383" height="42"
-                 fontSize="10.0" hTextAlign="Right">
-            <text><![CDATA[Information about the process instance]]></text>
-        </element>
-        <element kind="image" uuid="5d64e5b3-07bb-48ab-89dc-15c0c46bb19a" x="433" y="-115" width="267" height="209">
-            <expression><![CDATA["coffee_stain.png"]]></expression>
-        </element>
-    </title>
-    <pageHeader splitType="Stretch"/>
-    <columnHeader height="16" splitType="Stretch">
-        <element kind="line" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93" positionType="FixRelativeToBottom" x="0" y="15"
-                 width="555" height="1">
-            <pen lineWidth="0.5" lineColor="#999999"/>
-        </element>
-    </columnHeader>
-    <detail>
-        <band height="192" splitType="Stretch">
-            <element kind="frame" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766" mode="Opaque" x="0" y="-20" width="555"
-                     height="75" style="Row">
-                <element kind="textField" uuid="21f30964-7017-45a3-a98e-6908a81bb153" x="160" y="10" width="100"
-                         height="20">
-                    <expression><![CDATA[$P{context.processInstanceKey}]]></expression>
-                </element>
-                <element kind="staticText" uuid="26dfee6e-2e70-45f2-b4fa-2007f09989c1" x="20" y="10" width="100"
-                         height="20">
-                    <text><![CDATA[Process instance key :]]></text>
-                </element>
-                <element kind="staticText" uuid="f66736a6-ce8d-4188-b638-8811140ed989" x="453" y="5" width="100"
-                         height="15" fontSize="6.0" italic="true">
-                    <text><![CDATA[Context]]></text>
-                </element>
-                <box style="Row">
-                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                </box>
-            </element>
-            <element kind="frame" uuid="25941e30-c69e-47c8-b4c5-6e3bf1dc3ee4" x="10" y="70" width="543" height="122">
-                <element kind="staticText" uuid="921dec64-fdf5-4b54-a595-3e041f0de114" x="453" y="5" width="90"
-                         height="15" fontSize="6.0" italic="true">
-                    <text><![CDATA[Variables]]></text>
-                </element>
-                <element kind="staticText" uuid="28d48eb5-ec04-4ffa-b669-421cba857fdd" x="20" y="10" width="100"
-                         height="20">
-                    <text><![CDATA[Customer Name:]]></text>
-                </element>
-                <element kind="textField" uuid="6194b18a-3bd0-45fd-84ac-39ea1ee29a73" x="160" y="10" width="100"
-                         height="20">
-                    <expression><![CDATA[$P{variables.customerName}]]></expression>
-                </element>
-                <box>
-                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-                </box>
-            </element>
-        </band>
-    </detail>
-    <columnFooter height="45" splitType="Stretch">
-        <element kind="line" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c" positionType="FixRelativeToBottom" x="0" y="3"
-                 width="555" height="1">
-            <pen lineWidth="0.5" lineColor="#999999"/>
-        </element>
-    </columnFooter>
-    <pageFooter height="25" splitType="Stretch">
-        <element kind="frame" uuid="183682bc-d976-4756-83e0-6625a3f98ed1" mode="Opaque" x="-21" y="1" width="597"
-                 height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
-            <element kind="textField" uuid="0193f9b3-1559-491a-8580-b6988863b6a1" x="533" y="0" width="40" height="20"
-                     forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle"
-                     style="Column header">
-                <expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
-            </element>
-            <element kind="textField" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0" x="453" y="0" width="80" height="20"
-                     forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle"
-                     style="Column header">
-                <expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
-            </element>
-            <element kind="textField" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae" x="22" y="1" width="197" height="20"
-                     forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle"
-                     style="Column header">
-                <expression><![CDATA[new java.util.Date()]]></expression>
-            </element>
-        </element>
-    </pageFooter>
-    <summary splitType="Stretch"/>
+<jasperReport name="ProcessInstanceReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50.0" bold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18.0"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12.0" bold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12.0"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle backcolor="#E6DAC3">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="variablesDataset" uuid="b2e4a6c8-d0f2-4a6c-8e0a-2c4e6a8b0d2f">
+		<field name="name" class="java.lang.String"/>
+		<field name="value" class="java.lang.String"/>
+	</dataset>
+	<dataset name="contextDataset" uuid="c3d4e5f6-a1b2-4c3d-8e9f-0a1b2c3d4e5f">
+		<field name="name" class="java.lang.String"/>
+		<field name="value" class="java.lang.String"/>
+	</dataset>
+	<parameter name="variables" class="java.util.Map"/>
+	<parameter name="context" class="java.util.Map"/>
+	<background splitType="Stretch"/>
+	<title height="136" splitType="Stretch">
+		<element kind="image" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1" x="0" y="0" width="164" height="126">
+			<expression><![CDATA[new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode("PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjc4LjI5MiIgaGVpZ2h0PSI0OS45MDYiIHZpZXdCb3g9IjAgMCAyNzguMjkyIDQ5LjkwNiI+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cmVjdCB3aWR0aD0iMjc4LjI5MiIgaGVpZ2h0PSI0OS45MDYiIGZpbGw9Im5vbmUiLz48L2NsaXBQYXRoPjwvZGVmcz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDApIiBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGQ9Ik0yNy42NTcsMy42NzZWMTguNGExNS40NjksMTUuNDY5LDAsMCwxLS4zNjksMy45MzksNS45MjksNS45MjksMCwwLDEtMS4yNDYsMi40OTIsNS42ODIsNS42ODIsMCwwLDEtNC41NjIsMi4wMjIsNy42NTMsNy42NTMsMCwwLDEtNC4wMjEtMS4xMjdsMS42NzUtMi45NDdhNC4yNzIsNC4yNzIsMCwwLDAsMi4zNDYuODM5QTIuMTY1LDIuMTY1LDAsMCwwLDIzLjYsMjIuNDU0YTkuNDU0LDkuNDU0LDAsMCwwLC42MTUtNC4wNjZWMy42NzZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0Ny42NjcgMTAuMDM3KSIgZmlsbD0iIzAwNzZhZCIvPjxwYXRoIGQ9Ik0zNi4yNjgsMjAuMTk1SDI3LjkxNmwtMi4xNjcsNC43NDlIMjIuNTc0bDkuNjUtMjAuNzE3LDkuMzA3LDIwLjcxN0gzOC4zMTJabS0xLjItMi43NjRMMzIuMTcyLDEwLjhsLTMuMDI5LDYuNjI5WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEuNjMyIDExLjUzOCkiIGZpbGw9IiMwMDc2YWQiLz48cGF0aCBkPSJNNDEuNDE4LDcuNzIxLDM5LjAzLDkuMTM4QTQuMTI3LDQuMTI3LDAsMCwwLDM3Ljc1NSw3LjYyYTMuNCwzLjQsMCwwLDAtMy42NjMuMjkxLDIuMTY0LDIuMTY0LDAsMCwwLS44MDksMS43MmMwLC45NTUuNzA5LDEuNzIsMi4xMjYsMi4zbDEuOTQ3LjhhOC4yMDYsOC4yMDYsMCwwLDEsMy40OCwyLjM0Niw1LjI0Myw1LjI0MywwLDAsMSwxLjEsMy4zOTQsNS45ODcsNS45ODcsMCwwLDEtMS43OSw0LjQ1NEE2LjE2MSw2LjE2MSwwLDAsMSwzNS42NjYsMjQuN2E2LjAwOSw2LjAwOSwwLDAsMS00LjItMS41MDcsNi45NTMsNi45NTMsMCwwLDEtMi4wMjktNC4yMzdsMi45OC0uNjUzYTUuMDgsNS4wOCwwLDAsMCwuNzA1LDIuMzcyLDMuMzU2LDMuMzU2LDAsMCwwLDQuOTM5LjMzOSwzLjE4LDMuMTgsMCwwLDAsLjkxLTIuMzM1LDMuMjQ0LDMuMjQ0LDAsMCwwLS4xNi0xLjA0NCwyLjY4MSwyLjY4MSwwLDAsMC0uNDkyLS44NzMsNC4xMjcsNC4xMjcsMCwwLDAtLjg2NS0uNzQyLDguMzE0LDguMzE0LDAsMCwwLTEuMjY4LS42NkwzNC4zLDE0LjU2OXEtNC4wMTctMS42OS00LjAxNy00Ljk1YTQuNzExLDQuNzExLDAsMCwxLDEuNjgyLTMuNjc4LDYuMDkxLDYuMDkxLDAsMCwxLDQuMTg1LTEuNDg4LDUuODM3LDUuODM3LDAsMCwxLDUuMjY3LDMuMjY4IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4MC4zNzcgMTIuMTU4KSIgZmlsbD0iIzAwNzZhZCIvPjxwYXRoIGQ9Ik0zOC4wNjQsMTYuMTQxdjcuOTE1SDM1LjEzMlY0LjU1MWgzLjMyN2ExNC45NDcsMTQuOTQ3LDAsMCwxLDMuNjkzLjM0Myw0Ljk1OCw0Ljk1OCwwLDAsMSwyLjIxOSwxLjI5MSw1LjU2Myw1LjU2MywwLDAsMSwxLjY3NSw0LjE0NCw1LjM3Niw1LjM3NiwwLDAsMS0xLjc5MSw0LjI0OSw3LjEsNy4xLDAsMCwxLTQuODMxLDEuNTYzWm0wLTIuNzY0aDEuMXE0LjA1MSwwLDQuMDUxLTMuMSwwLTIuOTkzLTQuMTc4LTNoLS45NzRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NS45MTggMTIuNDI1KSIgZmlsbD0iIzAwNzZhZCIvPjxwYXRoIGQ9Ik01MS4wMTUsNy4zMTJINDMuMlYxMmg3LjU4N3YyLjc2NEg0My4ydjYuNTMyaDcuODE5djIuNzY0SDQwLjI2NVY0LjU1MmgxMC43NVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwOS45MzEgMTIuNDI3KSIgZmlsbD0iIzAwNzZhZCIvPjxwYXRoIGQ9Ik01Mi4xNjQsMTUuNzQzLDU4LjIsMjQuMDU3SDU0LjZsLTUuNTY5LTcuOTgzSDQ4LjV2Ny45ODNINDUuNTczVjQuNTUyaDMuNDQzYzIuNTc4LDAsNC40MzEuNDg5LDUuNTc3LDEuNDU1YTUuMzM3LDUuMzM3LDAsMCwxLDEuODkxLDQuMjY3LDUuNTI2LDUuNTI2LDAsMCwxLTEuMTksMy41NjIsNS4yNTgsNS4yNTgsMCwwLDEtMy4xMywxLjkwNk00OC41LDEzLjVoLjkzM3E0LjE1MiwwLDQuMTUyLTMuMmMwLTEuOTkyLTEuMzQ3LTMtNC4wNC0zSDQ4LjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjQuNDI0IDEyLjQyOCkiIGZpbGw9IiMwMDc2YWQiLz48cGF0aCBkPSJNNTkuNTA1LDIxLjAxMWEzLjIsMy4yLDAsMCwwLC45MS0yLjMzNSwzLjMzNCwzLjMzNCwwLDAsMC0uMTU3LTEuMDQ0LDIuNzUxLDIuNzUxLDAsMCwwLS40OTItLjg3Myw0LjA4Nyw0LjA4NywwLDAsMC0uODczLS43NDIsNy42MzIsNy42MzIsMCwwLDAtMS4yNjUtLjY2bC0xLjg4Ny0uNzg3Yy0yLjY3OC0xLjEyNy00LjAxNy0yLjc4My00LjAxNy00Ljk1YTQuNzExLDQuNzExLDAsMCwxLDEuNjgyLTMuNjc4LDYuMDYsNi4wNiwwLDAsMSw0LjE4NS0xLjQ4OCw1LjgzNCw1LjgzNCwwLDAsMSw1LjI2NywzLjI2OEw2MC40NjgsOS4xMzRBNC4wMDYsNC4wMDYsMCwwLDAsNTkuMTkyLDcuNjJhMi45MzcsMi45MzcsMCwwLDAtMS42MjYtLjQsMi45ODksMi45ODksMCwwLDAtMi4wMzMuNjk0LDIuMTU3LDIuMTU3LDAsMCwwLS44MTMsMS43MmMwLC45NTUuNzEyLDEuNzIsMi4xMywyLjNsMS45NDcuOGE4LjIyLDguMjIsMCwwLDEsMy40OCwyLjM0Niw1LjI4Myw1LjI4MywwLDAsMSwxLjEsMy4zOTQsNS45NjIsNS45NjIsMCwwLDEtMS43OTQsNC40NTRBNi4xNCw2LjE0LDAsMCwxLDU3LjEsMjQuN2E1Ljk2OSw1Ljk2OSwwLDAsMS00LjE4OS0xLjUxMSw2LjksNi45LDAsMCwxLTIuMDMzLTQuMjM0bDIuOTc3LS42NTNhNS4wODMsNS4wODMsMCwwLDAsLjcxMiwyLjM3MiwzLjM1MiwzLjM1MiwwLDAsMCw0LjkzNS4zMzkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEzOC45MTYgMTIuMTU4KSIgZmlsbD0iIzAwNzZhZCIvPjxwYXRoIGQ9Ik01Ni4yOTIsMTQuNDkxYTkuNTU5LDkuNTU5LDAsMCwxLDMuMDE0LTcuMDgsOS45Myw5LjkzLDAsMCwxLDcuMjIyLTIuOTU4LDkuNzQ3LDkuNzQ3LDAsMCwxLDcuMTQ3LDIuOTg0LDkuNzg0LDkuNzg0LDAsMCwxLDIuOTkyLDcuMTY5LDkuNiw5LjYsMCwwLDEtMyw3LjE0MywxMC4yOTUsMTAuMjk1LDAsMCwxLTE0LjA2Ny4zMzIsOS42LDkuNiwwLDAsMS0zLjMtNy41OTFtMi45NTguMDM0YTcuMDY5LDcuMDY5LDAsMCwwLDIuMTc1LDUuMzI3QTcuMTk1LDcuMTk1LDAsMCwwLDcxLjYsMTkuODEsNy4yMTEsNy4yMTEsMCwwLDAsNzMuNywxNC41NzcsNy4xNTIsNy4xNTIsMCwwLDAsNzEuNjE2LDkuMzRhNy4yNjgsNy4yNjgsMCwwLDAtMTAuMjY2LDAsNy4wNDksNy4wNDksMCwwLDAtMi4xLDUuMTg1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTMuNjg5IDEyLjE1OCkiIGZpbGw9IiMwMDc2YWQiLz48cGF0aCBkPSJNNzMuODYyLDcuMzEyaC02LjhWMTJoNi41NTh2Mi43NjRINjcuMDY1djkuM0g2NC4xMzdWNC41NTJoOS43MjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNzUuMTA4IDEyLjQyNykiIGZpbGw9IiMwMDc2YWQiLz48cGF0aCBkPSJNNzUuOTE1LDcuMzEyVjI0LjA1N0g3Mi45ODNWNy4zMTJINjguNVY0LjU1Mmg3LjM4NHYyLjc2eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTg3LjAwOSAxMi40MjcpIiBmaWxsPSIjMDA3NmFkIi8+PHBhdGggZD0iTTE0LjUsNy4wMzdDMjUuMS0uNDg3LDM2Ljc4Mi0yLjI0LDQwLjU3OSwzLjExN2MxLjU0NCwyLjE4MiwxLjUzMyw1LjIyMi4yNSw4LjU2NWEzLjE2NSwzLjE2NSwwLDAsMS0uNTExLTEuMzEzYy0yLjM2OS0zLjM0Ni0xMS4yNzYtMS4wOTMtMTkuOSw1LjAyMVM2LjczMSwyOS4xNjgsOS4xLDMyLjUxMWEzLjEwNSwzLjEwNSwwLDAsMCwxLjA3MS45MjVjLTMuNTcuMDkzLTYuNDUzLS44OTItOC0zLjA3NC0zLjgtNS4zNTcsMS43MTItMTUuOCwxMi4zMjUtMjMuMzI1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyLjY2MSAwLjAzOSkiIGZpbGw9IiM5OGI1ZDYiLz48cGF0aCBkPSJNNDEuMDQ4LDQwLjc3OEMyNS45Myw1MS41MDYsOC41OTIsNTMsMi4yNzMsNDQuMDg3YTEzLjg2NiwxMy44NjYsMCwwLDEtMi4xMTktMTAsOC4wNzMsOC4wNzMsMCwwLDAsMS4wNTksMi4xODZjNC44MTYsNi44LDE5LjY0Nyw0LjU2MiwzMy4xMjEtNC45OTFTNTQ4LjQ2OCw1MC45ODIsNDkuOTgyLDEuNjcxQTguMzE4LDguMzE4LDAsMCwwLDQ4LjMzNywwLDEzLjg1NCwxMy44NTQsMCwwLDEsNTcsNS4yNjdjNi4zMTksOC45MTEtLjg0MywyNC44LTE1Ljk0NywzNS41MTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjAwMSAwKSIgZmlsbD0iIzAwNzZhZCIvPjxwYXRoIGQ9Ik03NC4zNzYsMy44NzJWNy4zNDVINzMuMTNWMy44NzJoLS45NTFWMi44aDMuMTQ4VjMuODcyWm0xLjE4MiwzLjQ3M0w3Ni4zMiwyLjhoMS4yMjNsLjg2NSwyLjMyLjkxLTIuMzJoMS4yMzVsLjY3NSw0LjU0SDc5Ljk4M2wtLjMwNi0yLjQ2Mkw3OC42NjIsNy4zNDVoLS41NDhsLS45NTktMi40NjItLjM2MiwyLjQ2MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE5Ny4wNjQgNy42NTkpIiBmaWxsPSIjMDA3NmFkIi8+PC9nPjwvc3ZnPg=="))]]></expression>
+		</element>
+		<element kind="staticText" uuid="1a652692-054a-40f3-ade5-68d8da36626d" x="170" y="0" width="390" height="62" fontSize="30.0" vTextAlign="Middle" style="Title">
+			<text><![CDATA[Process Instance Report]]></text>
+		</element>
+		<element kind="staticText" uuid="f0bfb1ea-a85a-47cd-a1a4-43f22b45e80f" x="170" y="62" width="385" height="20" fontSize="10.0" italic="true" hTextAlign="Right" forecolor="#736343">
+			<text><![CDATA[Information about the process instance, with process context and process variables]]></text>
+		</element>
+		<element kind="image" uuid="5d64e5b3-07bb-48ab-89dc-15c0c46bb19a" x="433" y="-115" width="267" height="209">
+			<expression><![CDATA[new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode("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dTAAAOpgAAA6mAAAF3CculE8AAAAGFBMVEW0tLTW1tZ1dXU8PDyUlJRWVlYAAAD///9ARuvCAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFHmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDEgNzkuYzAyMDRiMmRlZiwgMjAyMy8wMi8wMi0xMjoxNDoyNCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI0LjQgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTEwLTE3VDExOjEzOjIzLTA3OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0xMC0xN1QxMTozOTo0My0wNzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0xMC0xN1QxMTozOTo0My0wNzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjIiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJ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"))]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="16" splitType="Stretch">
+		<element kind="line" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="420" splitType="Stretch">
+			<!-- Context card -->
+			<element kind="frame" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766" x="0" y="0" width="555" height="160">
+				<element kind="rectangle" uuid="a0b1c2d3-e4f5-6789-abcd-ef0123456789" x="0" y="0" width="555" height="160" radius="10" mode="Opaque" backcolor="#FFFFFF">
+					<pen lineWidth="1.5" lineColor="#CCCCCC"/>
+				</element>
+				<element kind="staticText" uuid="f66736a6-ce8d-4188-b638-8811140ed989" x="12" y="2" width="531" height="22" fontSize="13.0" bold="true" forecolor="#0076AD" hTextAlign="Right" vTextAlign="Middle">
+					<text><![CDATA[Context]]></text>
+				</element>
+				<element kind="staticText" uuid="26dfee6e-2e70-45f2-b4fa-2007f09989c1" x="12" y="36" width="265" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" style="Column header">
+					<text><![CDATA[Name]]></text>
+					<box leftPadding="6" rightPadding="6">
+						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+					</box>
+				</element>
+				<element kind="staticText" uuid="21f30964-7017-45a3-a98e-6908a81bb153" x="277" y="36" width="266" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" style="Column header">
+					<text><![CDATA[Value]]></text>
+					<box leftPadding="6" rightPadding="6">
+						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+					</box>
+				</element>
+				<element kind="component" uuid="aa11bb22-cc33-dd44-ee55-ff6677889900" x="12" y="60" width="531" height="90">
+					<component kind="list" printOrder="Vertical">
+						<datasetRun subDataset="contextDataset">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(((java.util.Map<String,Object>)$P{context}).entrySet().stream().map(e -> { java.util.Map<String,Object> r = new java.util.HashMap<>(); r.put("name", e.getKey()); r.put("value", e.getValue() != null ? String.valueOf(e.getValue()) : ""); return r; }).collect(java.util.stream.Collectors.toList()))]]></dataSourceExpression>
+						</datasetRun>
+						<contents height="22" width="531">
+							<element kind="textField" uuid="bb22cc33-dd44-ee55-ff66-778899001122" x="0" y="0" width="265" height="22" style="Detail">
+								<expression><![CDATA[$F{name}]]></expression>
+								<box leftPadding="6" rightPadding="6">
+									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+								</box>
+							</element>
+							<element kind="textField" uuid="cc33dd44-ee55-ff66-7788-990011223344" x="265" y="0" width="266" height="22" style="Detail">
+								<expression><![CDATA[$F{value}]]></expression>
+								<box leftPadding="6" rightPadding="6">
+									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+								</box>
+							</element>
+						</contents>
+					</component>
+				</element>
+			</element>
+			<!-- Variables card -->
+			<element kind="frame" uuid="25941e30-c69e-47c8-b4c5-6e3bf1dc3ee4" x="0" y="172" width="555" height="240">
+				<element kind="rectangle" uuid="b1c2d3e4-f5a6-7890-bcde-f01234567890" x="0" y="0" width="555" height="240" radius="10" mode="Opaque" backcolor="#FFFFFF">
+					<pen lineWidth="1.5" lineColor="#CCCCCC"/>
+				</element>
+				<element kind="staticText" uuid="921dec64-fdf5-4b54-a595-3e041f0de114" x="12" y="2" width="531" height="22" fontSize="13.0" bold="true" forecolor="#0076AD" hTextAlign="Right" vTextAlign="Middle">
+					<text><![CDATA[Variables]]></text>
+				</element>
+				<element kind="staticText" uuid="28d48eb5-ec04-4ffa-b669-421cba857fdd" x="12" y="36" width="265" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" style="Column header">
+					<text><![CDATA[Name]]></text>
+					<box leftPadding="6" rightPadding="6">
+						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+					</box>
+				</element>
+				<element kind="staticText" uuid="c3e5a7b9-d1f3-5b7d-9f1b-3d5f7a9c1e3f" x="277" y="36" width="266" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" style="Column header">
+					<text><![CDATA[Value]]></text>
+					<box leftPadding="6" rightPadding="6">
+						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+					</box>
+				</element>
+				<element kind="component" uuid="d4f6b8ca-e2a4-6c8e-a0c2-4e6a8c0e2a4c" x="12" y="60" width="531" height="168">
+					<component kind="list" printOrder="Vertical">
+						<datasetRun subDataset="variablesDataset">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(((java.util.Map<String,Object>)$P{variables}).entrySet().stream().map(e -> { java.util.Map<String,Object> r = new java.util.HashMap<>(); r.put("name", e.getKey()); r.put("value", e.getValue() != null ? String.valueOf(e.getValue()) : ""); return r; }).collect(java.util.stream.Collectors.toList()))]]></dataSourceExpression>
+						</datasetRun>
+						<contents height="22" width="531">
+							<element kind="textField" uuid="e5a7c9db-f3b5-7d9f-b1d3-5f7b9d1f3b5f" x="0" y="0" width="265" height="22" style="Detail">
+								<expression><![CDATA[$F{name}]]></expression>
+								<box leftPadding="6" rightPadding="6">
+									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+								</box>
+							</element>
+							<element kind="textField" uuid="f6b8dace-a4c6-8eaf-c2e4-6a8caef4c6a8" x="265" y="0" width="266" height="22" style="Detail">
+								<expression><![CDATA[$F{value}]]></expression>
+								<box leftPadding="6" rightPadding="6">
+									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+								</box>
+							</element>
+						</contents>
+					</component>
+				</element>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch">
+		<element kind="line" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="25" splitType="Stretch">
+		<element kind="frame" uuid="183682bc-d976-4756-83e0-6625a3f98ed1" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF">
+			<element kind="textField" uuid="0193f9b3-1559-491a-8580-b6988863b6a1" x="533" y="0" width="40" height="20" forecolor="#736343" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0" x="453" y="0" width="80" height="20" forecolor="#736343" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+			</element>
+			<element kind="textField" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae" x="22" y="1" width="197" height="20" forecolor="#736343" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
 </jasperReport>

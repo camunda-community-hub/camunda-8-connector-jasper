@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Document preview",
+      "type": "documentPreview",
+      "layout": {
+        "row": "Row_0j6k26e",
+        "columns": null
+      },
+      "id": "Field_0sodzap",
+      "dataSource": "=processInstanceReportHistory"
+    }
+  ],
+  "type": "default",
+  "id": "JasperResultForm",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.9.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.46.1"
+  },
+  "schemaVersion": 19
+}

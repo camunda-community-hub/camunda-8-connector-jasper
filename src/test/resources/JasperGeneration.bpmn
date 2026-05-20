@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1o6vm55" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.46.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <bpmn:collaboration id="Collaboration_0ua569o">
+    <bpmn:participant id="Participant_0xbtqip" name="JasperReport" processRef="Process_JasperReport" />
+    <bpmn:participant id="Participant_1kbbp71" name="Camunda Doc" />
+    <bpmn:messageFlow id="Flow_0vfss80" sourceRef="Activity_1sai7gf" targetRef="Participant_1kbbp71" />
+    <bpmn:messageFlow id="Flow_1qn1e27" sourceRef="Participant_1kbbp71" targetRef="Activity_1coxw5u" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_JasperReport" name="JasperReport" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_03jegks</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1tht7w2">
+      <bpmn:incoming>Flow_0zp24ui</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:scriptTask id="Activity_0crispm" name="Customer info">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#34;customerName&#34;: &#34;Camunda&#34;, &#34;customerAddress&#34;: &#34;453 Ocean view&#34;, &#10; &#34;customerCity&#34;:&#34;San Francisco&#34;}" resultVariable="customerInfo" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_03jegks</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sugaee</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="Activity_1sai7gf" name="Jasper">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="c-jasper-function" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=customerInfo" target="parameters" />
+          <zeebe:input source="={ &#34;storageDefinition&#34;: &#34;URL&#34;, &#34;content&#34;: &#34;https://github.com/camunda-community-hub/camunda-8-connector-jasper/raw/main/src/test/resources/ProcessInstanceReport.jrxml&#34;}" target="jasperReportUrl" />
+          <zeebe:input source="=&#34;ProcessInstanceReport.pdf&#34;" target="destinationFileName" />
+          <zeebe:input source="={ &#34;type&#34;: &#34;CAMUNDA&#34;}" target="destinationJsonStorageDefinition" />
+          <zeebe:input source="={ &#34;storageDefinition&#34;: &#34;FOLDER:c:/dev/intellij/community/connector/camunda-8-connector-jasper/src/test/resources&#34;, &#10;  &#34;content&#34;: &#34;ProcessInstanceReport.jrxml&#34;}" target="jasperReport" />
+          <zeebe:input source="=&#34;PDF&#34;" target="formatExport" />
+          <zeebe:output source="= result.destinationFile" target="processInstanceReportFileStorage" />
+          <zeebe:output source="= [result.destinationFile.camundaReference]" target="processInstanceReportHistory" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="result" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1sugaee</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rto3qv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1coxw5u" name="Review">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="JasperResultForm" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1rto3qv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zp24ui</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="Activity_12s7z2r" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_1pmvp1r">
+        <bpmn:outgoing>Flow_0judoqm</bpmn:outgoing>
+        <bpmn:timerEventDefinition id="TimerEventDefinition_0it66g9">
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1H</bpmn:timeDuration>
+        </bpmn:timerEventDefinition>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="Event_04w8oab">
+        <bpmn:incoming>Flow_0judoqm</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0judoqm" sourceRef="Event_1pmvp1r" targetRef="Event_04w8oab" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_03jegks" sourceRef="StartEvent_1" targetRef="Activity_0crispm" />
+    <bpmn:sequenceFlow id="Flow_0zp24ui" sourceRef="Activity_1coxw5u" targetRef="Event_1tht7w2" />
+    <bpmn:sequenceFlow id="Flow_1sugaee" sourceRef="Activity_0crispm" targetRef="Activity_1sai7gf" />
+    <bpmn:sequenceFlow id="Flow_1rto3qv" sourceRef="Activity_1sai7gf" targetRef="Activity_1coxw5u" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0ua569o">
+      <bpmndi:BPMNShape id="Participant_0xbtqip_di" bpmnElement="Participant_0xbtqip" isHorizontal="true">
+        <dc:Bounds x="130" y="190" width="980" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tht7w2_di" bpmnElement="Event_1tht7w2">
+        <dc:Bounds x="752" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tgxebj_di" bpmnElement="Activity_0crispm">
+        <dc:Bounds x="270" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ivbzgi_di" bpmnElement="Activity_1sai7gf">
+        <dc:Bounds x="430" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1l2ecvm_di" bpmnElement="Activity_1coxw5u">
+        <dc:Bounds x="590" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zaycvk_di" bpmnElement="Activity_12s7z2r" isExpanded="true">
+        <dc:Bounds x="560" y="400" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jvrbpr_di" bpmnElement="Event_1pmvp1r">
+        <dc:Bounds x="600" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_04w8oab_di" bpmnElement="Event_04w8oab">
+        <dc:Bounds x="692" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0judoqm_di" bpmnElement="Flow_0judoqm">
+        <di:waypoint x="636" y="500" />
+        <di:waypoint x="692" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03jegks_di" bpmnElement="Flow_03jegks">
+        <di:waypoint x="218" y="250" />
+        <di:waypoint x="270" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zp24ui_di" bpmnElement="Flow_0zp24ui">
+        <di:waypoint x="690" y="250" />
+        <di:waypoint x="752" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sugaee_di" bpmnElement="Flow_1sugaee">
+        <di:waypoint x="370" y="250" />
+        <di:waypoint x="430" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rto3qv_di" bpmnElement="Flow_1rto3qv">
+        <di:waypoint x="530" y="250" />
+        <di:waypoint x="590" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_03hh3yu_di" bpmnElement="Participant_1kbbp71" isHorizontal="true">
+        <dc:Bounds x="130" y="80" width="790" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0vfss80_di" bpmnElement="Flow_0vfss80">
+        <di:waypoint x="480" y="210" />
+        <di:waypoint x="480" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qn1e27_di" bpmnElement="Flow_1qn1e27">
+        <di:waypoint x="650" y="140" />
+        <di:waypoint x="650" y="210" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
