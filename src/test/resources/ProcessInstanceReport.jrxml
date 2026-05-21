@@ -208,6 +208,10 @@
 							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource((java.util.List)((java.util.Map)$P{history}).get("elementInstances"))]]></dataSourceExpression>
 						</datasetRun>
 						<contents height="22" width="531">
+							<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-abcd-ef1234567891" x="0" y="0" width="531" height="22" mode="Opaque" backcolor="#F0F0F0">
+								<pen lineWidth="0.0"/>
+								<printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></printWhenExpression>
+							</element>
 							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4a1" x="0" y="0" width="136" height="22" style="Detail" textAdjust="StretchHeight">
 								<expression><![CDATA[$F{elementName}]]></expression>
 								<box leftPadding="6" rightPadding="6">
@@ -232,13 +236,13 @@
 									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
 								</box>
 							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4c3" x="316" y="0" width="70" height="22" style="Detail" textAdjust="StretchHeight">
+							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4c3" x="316" y="0" width="70" height="22" style="Detail" fontSize="7.0" textAdjust="StretchHeight">
 								<expression><![CDATA[$F{startDate} != null ? $F{startDate}.toLowerCase() : ""]]></expression>
 								<box leftPadding="6" rightPadding="6">
 									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
 								</box>
 							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4d4" x="386" y="0" width="70" height="22" style="Detail" textAdjust="StretchHeight">
+							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4d4" x="386" y="0" width="70" height="22" style="Detail" fontSize="7.0" textAdjust="StretchHeight">
 								<expression><![CDATA[$F{endDate} != null ? $F{endDate}.toLowerCase() : ""]]></expression>
 								<box leftPadding="6" rightPadding="6">
 									<pen lineWidth="0.5" lineColor="#DDDDDD"/>

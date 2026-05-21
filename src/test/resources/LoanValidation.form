@@ -51,6 +51,16 @@
       },
       "id": "Field_1sydmxi",
       "key": "loanAccepted"
+    },
+    {
+      "label": "Jasper report",
+      "type": "filepicker",
+      "layout": {
+        "row": "Row_05pi8ju",
+        "columns": null
+      },
+      "id": "Field_1knuqiw",
+      "key": "jasperReport"
     }
   ],
   "type": "default",

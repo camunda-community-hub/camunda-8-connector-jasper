@@ -1,17 +1,17 @@
 {
   "components": [
     {
-      "label": "Loan Application Report",
+      "label": "Loan Application Report 2",
       "type": "documentPreview",
       "layout": {
         "row": "Row_0dgwfdc",
         "columns": null
       },
       "id": "Field_0xaoopi",
-      "dataSource": "=[loanApplicationReport?camundaReference]"
+      "dataSource": "=[LoanApplicationReport.camundaReference]"
     },
     {
-      "label": "Document preview",
+      "label": "Process instance Report",
       "type": "documentPreview",
       "layout": {
         "row": "Row_0j6k26e",
