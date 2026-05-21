@@ -1,6 +1,16 @@
 {
   "components": [
     {
+      "label": "Loan Application Report",
+      "type": "documentPreview",
+      "layout": {
+        "row": "Row_0dgwfdc",
+        "columns": null
+      },
+      "id": "Field_0xaoopi",
+      "dataSource": "=[loanApplicationReport?camundaReference]"
+    },
+    {
       "label": "Document preview",
       "type": "documentPreview",
       "layout": {
@@ -8,7 +18,7 @@
         "columns": null
       },
       "id": "Field_0sodzap",
-      "dataSource": "=processInstanceReportHistory"
+      "dataSource": "=[processInstanceReport.camundaReference]"
     }
   ],
   "type": "default",

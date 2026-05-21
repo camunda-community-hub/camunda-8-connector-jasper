@@ -1,12 +1,15 @@
 package io.camunda.connector.jasper.report;
 
 import io.camunda.connector.api.error.ConnectorException;
-import io.camunda.connector.toolbox.JasperError;
+import io.camunda.connector.jasper.JasperError;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.export.*;
+import net.sf.jasperreports.engine.export.HtmlExporter;
+import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdsExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
-import net.sf.jasperreports.engine.export.ooxml.*;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.*;
 import net.sf.jasperreports.pdf.JRPdfExporter;
 import org.slf4j.Logger;
@@ -43,44 +46,45 @@ public class JasperGeneration {
     public ByteArrayOutputStream generate(FORMAT format, String jrxmlName,
                                           InputStream jrxmlStream,
                                           Map<String, Object> processVariablesData,
-                                          Map<String,Object> contextData,
-                                          Map<String,Object> historyData
-                                          )
+                                          Map<String, Object> contextData,
+                                          Map<String, Object> historyData
+    )
             throws ConnectorException {
         long begin = System.currentTimeMillis();
-String analysis="["+jrxmlName+"]";
+        String analysis = "[" + jrxmlName + "]";
         try {
             logger.info("[{}] compilation started...", jrxmlName);
-            analysis +=" compilation started...";
+            analysis += " compilation started...";
             JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
             long endCompilation = System.currentTimeMillis();
 
             logger.info("[{}] fill report started...", jrxmlName);
-            analysis +="Done. File report started...";
+            analysis += "Done. File report started...";
             Map<String, Object> reportData = new HashMap<>(historyData);
             reportData.put("variables", processVariablesData);
             reportData.put("context", contextData);
+            reportData.put("history", historyData);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportData, new JREmptyDataSource());
             long endFillReport = System.currentTimeMillis();
 
             logger.info("[{}] export started...", jrxmlName);
-            analysis +="Done. Export started...";
+            analysis += "Done. Export started...";
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             @SuppressWarnings({"rawtypes", "unchecked"})
             Exporter exporter = switch (format) {
-                case PDF            -> new JRPdfExporter();
-                case WORD           -> new JRDocxExporter();
-                case EXCEL          -> new JRXlsxExporter();
-                case POWERPOINT     -> new JRPptxExporter();
+                case PDF -> new JRPdfExporter();
+                case WORD -> new JRDocxExporter();
+                case EXCEL -> new JRXlsxExporter();
+                case POWERPOINT -> new JRPptxExporter();
                 case OPENOFFICEWRITER -> new JROdtExporter();
                 case OPENOFFICECALC -> new JROdsExporter();
-                case CSV            -> new JRCsvExporter();
-                case HTML           -> new HtmlExporter();
+                case CSV -> new JRCsvExporter();
+                case HTML -> new HtmlExporter();
             };
             ExporterOutput exporterOutput = switch (format) {
-                case CSV  -> new SimpleWriterExporterOutput(out);
+                case CSV -> new SimpleWriterExporterOutput(out);
                 case HTML -> new SimpleHtmlExporterOutput(out);
-                default   -> new SimpleOutputStreamExporterOutput(out);
+                default -> new SimpleOutputStreamExporterOutput(out);
             };
             exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             exporter.setExporterOutput(exporterOutput);

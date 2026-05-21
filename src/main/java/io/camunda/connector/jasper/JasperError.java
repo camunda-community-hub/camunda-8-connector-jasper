@@ -1,4 +1,4 @@
-package io.camunda.connector.toolbox;
+package io.camunda.connector.jasper;
 
 public class JasperError {
 

@@ -37,7 +37,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.10</version> <!-- Example: set your intended version -->
+        <version>3.4.5</version>
     </parent>
 
 
@@ -49,16 +49,22 @@
 
         <dependency>
             <groupId>io.camunda.connector</groupId>
+            <artifactId>spring-boot-starter-camunda-connectors</artifactId>
+            <version>${version.connector}</version>
+        </dependency>
+<!--
+        <dependency>
+            <groupId>io.camunda.connector</groupId>
             <artifactId>connector-core</artifactId>
             <version>${version.connector}</version>
-            <!--<scope>provided</scope>  -->
+
         </dependency>
         <dependency>
             <groupId>io.camunda.connector</groupId>
             <artifactId>connector-runtime-core</artifactId>
             <version>${version.connector}</version>
         </dependency>
-
+-->
         <dependency>
             <groupId>io.camunda.filestorage</groupId>
             <artifactId>filestorage</artifactId>
@@ -86,6 +92,13 @@
             <version>${version.slf4j}</version>
         </dependency>
 
+        <!-- Camunda Java Client — for search / historyAccess APIs (CamundaClient) -->
+        <dependency>
+            <groupId>io.camunda</groupId>
+            <artifactId>camunda-client-java</artifactId>
+            <version>${version.connector}</version>
+        </dependency>
+
         <!-- Access file  -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
@@ -102,31 +115,15 @@
             <artifactId>jasperreports-pdf</artifactId>
             <version>7.0.6</version>
         </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-docx</artifactId>
-            <version>7.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-xlsx</artifactId>
-            <version>7.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-pptx</artifactId>
-            <version>7.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-odt</artifactId>
-            <version>7.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-ods</artifactId>
-            <version>7.0.6</version>
-        </dependency>
+        <!-- Office format modules (docx/xlsx/pptx/odt/ods) are not in any public Maven repo for 7.x.
+             To re-enable, download the JasperReports 7.0.6 distribution and run:
+             mvn install:install-file -Dfile=<jar> -DgroupId=net.sf.jasperreports -DartifactId=jasperreports-docx -Dversion=7.0.6 -Dpackaging=jar
+        <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jasperreports-docx</artifactId><version>7.0.6</version></dependency>
+        <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jasperreports-xlsx</artifactId><version>7.0.6</version></dependency>
+        <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jasperreports-pptx</artifactId><version>7.0.6</version></dependency>
+        <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jasperreports-odt</artifactId><version>7.0.6</version></dependency>
+        <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jasperreports-ods</artifactId><version>7.0.6</version></dependency>
+        -->
 
         <!-- test dependencies -->
         <dependency>
@@ -209,12 +206,10 @@
     </build>
 
     <repositories>
-        <!--
         <repository>
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
         </repository>
-        -->
 
         <repository>
             <releases>
@@ -240,6 +235,17 @@
             <url>https://artifacts.camunda.com/artifactory/connectors-snapshots/</url>
         </repository>
 
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>jaspersoft</id>
+            <name>Jaspersoft Releases</name>
+            <url>https://jaspersoft.jfrog.io/artifactory/jr-ce-releases</url>
+        </repository>
 
     </repositories>
 

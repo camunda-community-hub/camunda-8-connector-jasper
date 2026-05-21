@@ -1,8 +1,7 @@
-package io.camunda.jasper;
+package io.camunda.connector.jasper;
 
 import io.camunda.cherry.definition.connector.SdkRunnerCherryConnector;
 import io.camunda.connector.cherrytemplate.RunnerParameter;
-import io.camunda.connector.jasper.JasperFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

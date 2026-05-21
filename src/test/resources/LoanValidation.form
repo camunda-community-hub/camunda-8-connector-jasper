@@ -1,0 +1,65 @@
+{
+  "components": [
+    {
+      "label": "Customer Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0swg4go",
+        "columns": null
+      },
+      "id": "Field_18bdjio",
+      "key": "customerInfo.customerName",
+      "readonly": true
+    },
+    {
+      "label": "Credit score",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0swg4go",
+        "columns": 6
+      },
+      "id": "Field_0t4rvip",
+      "key": "creditScore",
+      "readonly": true
+    },
+    {
+      "label": "Comment",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_13qc6c8",
+        "columns": null
+      },
+      "id": "Field_0b8brfz",
+      "key": "loanAcceptanceComment"
+    },
+    {
+      "label": "Checkbox group",
+      "values": [
+        {
+          "label": "Rejected",
+          "value": "rejected"
+        },
+        {
+          "label": "Accepted",
+          "value": "accepted"
+        }
+      ],
+      "type": "checklist",
+      "layout": {
+        "row": "Row_1vja7ut",
+        "columns": null
+      },
+      "id": "Field_1sydmxi",
+      "key": "loanAccepted"
+    }
+  ],
+  "type": "default",
+  "id": "LoanValidation",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.9.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.46.1"
+  },
+  "schemaVersion": 19
+}

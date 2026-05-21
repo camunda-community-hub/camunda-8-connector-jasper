@@ -1,4 +1,4 @@
-package io.camunda.jasper;
+package io.camunda.connector.jasper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
