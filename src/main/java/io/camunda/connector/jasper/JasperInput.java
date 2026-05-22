@@ -26,6 +26,7 @@ public class JasperInput implements CherryInput {
     public static final String DATA = "data";
     public static final String FORMAT_EXPORT = "formatExport";
     public static final String INCLUDE_PROCESS_HISTORY = "includeProcessHistory";
+    public static final String INCLUDE_CONTEXT = "includeContext";
     public static final String DESTINATION_FILE_NAME = "destinationFileName";
     public static final String DESTINATION_JSONSTORAGEDEFINITION = "destinationJsonStorageDefinition";
 
@@ -70,8 +71,15 @@ public class JasperInput implements CherryInput {
             "Include the process instance history. History is accessible in the report (all tasks exectued)")
             .addChoice(Boolean.TRUE.toString(), "Yes")
             .addChoice(Boolean.FALSE.toString(), "No");
-
-
+    public static final RunnerParameter jasperParameterIncludeContext = new RunnerParameter(
+            JasperInput.INCLUDE_CONTEXT,
+            // name
+            "Include context", // label
+            Boolean.class, // class
+            RunnerParameter.Level.REQUIRED, // level
+            "Include the context (processInstanceKey, processDefinitionKey, name...")
+            .addChoice(Boolean.TRUE.toString(), "Yes")
+            .addChoice(Boolean.FALSE.toString(), "No");
     public static final RunnerParameter jasperParameterDestinationFileName = new RunnerParameter(
             JasperInput.DESTINATION_FILE_NAME,
             // name
@@ -83,9 +91,17 @@ public class JasperInput implements CherryInput {
             JasperInput.DESTINATION_JSONSTORAGEDEFINITION, // name
             "JSon Storage Destination", // label
             Map.class, // class
-            RunnerParameter.Level.OPTIONAL, // level
+            RunnerParameter.Level.REQUIRED, // level
             "Storage Definition in Json.");
 
+    public static List<RunnerParameter> runnerParametersCollectList = List.of(
+            jasperParameterJasperReport,
+            jasperParameterData,
+            jasperParameterFormatExport,
+            jasperParameterIncludeContext,
+            jasperParameterIncludeHistory,
+            jasperParameterDestinationFileName,
+            jasperParameterDestinationJsonStorageDefinition);
     private final Logger logger = LoggerFactory.getLogger(JasperInput.class.getName());
 
     private Object jasperReport;
@@ -97,6 +113,8 @@ public class JasperInput implements CherryInput {
 
 
     private Boolean includeProcessHistory;
+
+    private Boolean includeContext;
 
     private String formatExport;
 
@@ -133,21 +151,18 @@ public class JasperInput implements CherryInput {
         return includeProcessHistory;
     }
 
+    public Boolean getIncludeContext() {
+        return includeContext;
+    }
+
     @JsonIgnore
     @Override
     public List<Map<String, Object>> getInputParameters() {
-        List<RunnerParameter> runnerParametersCollectList = List.of(
-                jasperParameterJasperReport,
-                jasperParameterData,
-                jasperParameterFormatExport,
-                jasperParameterIncludeHistory,
-                jasperParameterDestinationFileName,
-                jasperParameterDestinationJsonStorageDefinition);
+
 
         return runnerParametersCollectList.stream().map(t -> t.toMap()).toList();
-
-
     }
+
 
     /**
      * Return a Storage definition

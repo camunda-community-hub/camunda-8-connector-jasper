@@ -1,2 +1,0 @@
-{"variable.customerName": "Camunda",
- "context.processInstanceKey": "14343434"}

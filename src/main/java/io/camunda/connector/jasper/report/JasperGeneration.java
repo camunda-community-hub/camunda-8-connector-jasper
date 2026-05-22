@@ -24,25 +24,6 @@ public class JasperGeneration {
 
     private final Logger logger = LoggerFactory.getLogger(JasperGeneration.class.getName());
 
-    public enum FORMAT {
-        PDF("application/pdf", ".pdf"),
-        WORD("application/vnd.openxmlformats-officedocument.wordprocessingml.document", ".docx"),
-        EXCEL("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", ".xlsx"),
-        POWERPOINT("application/vnd.openxmlformats-officedocument.presentationml.presentation", ".pptx"),
-        OPENOFFICEWRITER("application/vnd.oasis.opendocument.text", ".odt"),
-        OPENOFFICECALC("application/vnd.oasis.opendocument.spreadsheet", ".ods"),
-        CSV("text/csv", ".csv"),
-        HTML("text/html", ".html");
-
-        public final String mimeType;
-        public final String extension;
-
-        FORMAT(String mimeType, String extension) {
-            this.mimeType = mimeType;
-            this.extension = extension;
-        }
-    }
-
     public ByteArrayOutputStream generate(FORMAT format, String jrxmlName,
                                           InputStream jrxmlStream,
                                           Map<String, Object> processVariablesData,
@@ -51,7 +32,7 @@ public class JasperGeneration {
     )
             throws ConnectorException {
         long begin = System.currentTimeMillis();
-        String analysis = "[" + jrxmlName + "]";
+        String analysis = "report[" + jrxmlName + "]";
         try {
             logger.info("[{}] compilation started...", jrxmlName);
             analysis += " compilation started...";
@@ -101,13 +82,32 @@ public class JasperGeneration {
             return out;
 
         } catch (Exception e) {
-            logger.error("Generate Jasper error [{}] processVariablesData[{}] ContextData[{}] HistoryData[{}]:  ",
+            logger.error("Generate Jasper {} processVariablesData[{}] ContextData[{}] HistoryData[{}]:  ",
                     analysis,
                     processVariablesData,
                     historyData, e);
             throw new ConnectorException(JasperError.ERROR_EXECUTING_JASPER, e.getMessage());
         }
 
+    }
+
+    public enum FORMAT {
+        PDF("application/pdf", ".pdf"),
+        WORD("application/vnd.openxmlformats-officedocument.wordprocessingml.document", ".docx"),
+        EXCEL("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", ".xlsx"),
+        POWERPOINT("application/vnd.openxmlformats-officedocument.presentationml.presentation", ".pptx"),
+        OPENOFFICEWRITER("application/vnd.oasis.opendocument.text", ".odt"),
+        OPENOFFICECALC("application/vnd.oasis.opendocument.spreadsheet", ".ods"),
+        CSV("text/csv", ".csv"),
+        HTML("text/html", ".html");
+
+        public final String mimeType;
+        public final String extension;
+
+        FORMAT(String mimeType, String extension) {
+            this.mimeType = mimeType;
+            this.extension = extension;
+        }
     }
 
 

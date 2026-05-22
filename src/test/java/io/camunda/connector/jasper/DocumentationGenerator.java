@@ -46,8 +46,18 @@ public class DocumentationGenerator {
             }
             writeLine(writer, "");
             writeLine(writer, cherryConnector.getDescription());
-            // for each function
 
+
+            writeTitle(writer, "###", "Inputs");
+            JasperInput jasperInput = new JasperInput();
+            writeParameters(writer, jasperInput.runnerParametersCollectList);
+
+            writeTitle(writer, "###", "Outputs");
+            JasperOutput jasperOutput = new JasperOutput();
+            writeParameters(writer, jasperOutput.runnerParametersCollectList);
+
+            writeTitle(writer, "###", "Errors");
+            writeErrors(writer, jasperFunction.getListBpmnErrors());
             writer.flush();
         } catch (Exception e) {
             logger.error("Exception during generation ", e);

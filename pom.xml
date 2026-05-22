@@ -17,8 +17,8 @@
 
 
         <!-- connector SDK version -->
-        <!-- connector SDK version 8.8.7 / 8.7.8 -->
-        <version.connector>8.8.7</version.connector>
+        <!-- connector SDK version 8.9.0 — bumped for getRootProcessInstanceKey() in camunda-client-java -->
+        <version.connector>8.9.0</version.connector>
         <version.filestorage>2.5.1</version.filestorage>
 
         <!-- external libraries -->
@@ -37,7 +37,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.5</version>
+        <version>4.0.5</version>
     </parent>
 
 
@@ -52,19 +52,7 @@
             <artifactId>spring-boot-starter-camunda-connectors</artifactId>
             <version>${version.connector}</version>
         </dependency>
-<!--
-        <dependency>
-            <groupId>io.camunda.connector</groupId>
-            <artifactId>connector-core</artifactId>
-            <version>${version.connector}</version>
 
-        </dependency>
-        <dependency>
-            <groupId>io.camunda.connector</groupId>
-            <artifactId>connector-runtime-core</artifactId>
-            <version>${version.connector}</version>
-        </dependency>
--->
         <dependency>
             <groupId>io.camunda.filestorage</groupId>
             <artifactId>filestorage</artifactId>
@@ -169,15 +157,13 @@
 
     </dependencies>
 
+    <!--
+        camunda-bom removed: it overrides Spring Boot's Micrometer version management,
+        causing ClassNotFoundException for ObservationKeyValueAnnotationHandler.
+        All Camunda artifacts carry explicit <version> tags so the BOM is not needed.
+    -->
     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.camunda</groupId>
-                <artifactId>camunda-bom</artifactId>
-                <version>8.8.0</version>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
+        <dependencies/>
     </dependencyManagement>
 
     <build>

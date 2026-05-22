@@ -49,214 +49,216 @@
 		</element>
 	</columnHeader>
 	<detail>
-		<band height="630" splitType="Stretch">
-			<!-- Context card -->
-			<element kind="frame" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766" x="0" y="0" width="555" height="160">
-				<element kind="rectangle" uuid="a0b1c2d3-e4f5-6789-abcd-ef0123456789" x="0" y="0" width="555" height="160" radius="10" mode="Opaque" backcolor="#0076AD">
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="rectangle" uuid="aa00bb11-cc22-dd33-ee44-ff5566778899" x="0" y="30" width="555" height="130" mode="Opaque" backcolor="#FFFFFF">
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="rectangle" uuid="a0b1c2d3-e4f5-6789-abcd-ef0123456780" x="0" y="0" width="555" height="160" radius="10" mode="Transparent">
-					<pen lineWidth="1.5" lineColor="#CCCCCC"/>
-				</element>
-				<element kind="staticText" uuid="f66736a6-ce8d-4188-b638-8811140ed989" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
-					<text><![CDATA[Context]]></text>
-				</element>
-				<element kind="staticText" uuid="26dfee6e-2e70-45f2-b4fa-2007f09989c1" x="12" y="36" width="265" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Name]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="21f30964-7017-45a3-a98e-6908a81bb153" x="277" y="36" width="266" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Value]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="component" uuid="aa11bb22-cc33-dd44-ee55-ff6677889900" x="12" y="60" width="531" height="90">
-					<component kind="list" printOrder="Vertical">
-						<datasetRun subDataset="contextDataset">
-							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(((java.util.Map<String,Object>)$P{context}).entrySet().stream().map(e -> { java.util.Map<String,Object> r = new java.util.HashMap<>(); r.put("name", e.getKey()); r.put("value", e.getValue() != null ? String.valueOf(e.getValue()) : ""); return r; }).collect(java.util.stream.Collectors.toList()))]]></dataSourceExpression>
-						</datasetRun>
-						<contents height="22" width="531">
-							<element kind="textField" uuid="bb22cc33-dd44-ee55-ff66-778899001122" x="0" y="0" width="265" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{name}]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="cc33dd44-ee55-ff66-7788-990011223344" x="265" y="0" width="266" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{value}]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-						</contents>
-					</component>
-				</element>
+		<!-- Context card band — stretches with list content -->
+		<band height="84" splitType="Stretch">
+			<element kind="rectangle" uuid="a0b1c2d3-e4f5-6789-abcd-ef0123456701" x="0" y="0" width="555" height="84" radius="10" mode="Opaque" backcolor="#0076AD" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
 			</element>
-			<!-- Variables card -->
-			<element kind="frame" uuid="25941e30-c69e-47c8-b4c5-6e3bf1dc3ee4" x="0" y="172" width="555" height="240">
-				<element kind="rectangle" uuid="b1c2d3e4-f5a6-7890-bcde-f01234567890" x="0" y="0" width="555" height="240" radius="10" mode="Opaque" backcolor="#0076AD">
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="rectangle" uuid="bb00cc11-dd22-ee33-ff44-005566778899" x="0" y="30" width="555" height="210" mode="Opaque" backcolor="#FFFFFF">
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="rectangle" uuid="b1c2d3e4-f5a6-7890-bcde-f01234567891" x="0" y="0" width="555" height="240" radius="10" mode="Transparent">
-					<pen lineWidth="1.5" lineColor="#CCCCCC"/>
-				</element>
-				<element kind="staticText" uuid="921dec64-fdf5-4b54-a595-3e041f0de114" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
-					<text><![CDATA[Variables]]></text>
-				</element>
-				<element kind="staticText" uuid="28d48eb5-ec04-4ffa-b669-421cba857fdd" x="12" y="36" width="265" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Name]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="c3e5a7b9-d1f3-5b7d-9f1b-3d5f7a9c1e3f" x="277" y="36" width="266" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Value]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="component" uuid="d4f6b8ca-e2a4-6c8e-a0c2-4e6a8c0e2a4c" x="12" y="60" width="531" height="168">
-					<component kind="list" printOrder="Vertical">
-						<datasetRun subDataset="variablesDataset">
-							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(((java.util.Map<String,Object>)$P{variables}).entrySet().stream().map(e -> { java.util.Map<String,Object> r = new java.util.HashMap<>(); r.put("name", e.getKey()); r.put("value", e.getValue() != null ? String.valueOf(e.getValue()) : ""); return r; }).collect(java.util.stream.Collectors.toList()))]]></dataSourceExpression>
-						</datasetRun>
-						<contents height="22" width="531">
-							<element kind="textField" uuid="e5a7c9db-f3b5-7d9f-b1d3-5f7b9d1f3b5f" x="0" y="0" width="265" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{name}]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="f6b8dace-a4c6-8eaf-c2e4-6a8caef4c6a8" x="265" y="0" width="266" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{value}]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-						</contents>
-					</component>
-				</element>
+			<element kind="rectangle" uuid="aa00bb11-cc22-dd33-ee44-ff5566770001" x="0" y="30" width="555" height="54" mode="Opaque" backcolor="#FFFFFF" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
 			</element>
-			<!-- HistoryAccess card -->
-			<element kind="frame" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a2b3" x="0" y="424" width="555" height="200">
-				<element kind="rectangle" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a2c4" x="0" y="0" width="555" height="200" radius="10" mode="Opaque" backcolor="#0076AD">
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="rectangle" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a2d5" x="0" y="30" width="555" height="170" mode="Opaque" backcolor="#FFFFFF">
-					<pen lineWidth="0.0"/>
-				</element>
-				<element kind="rectangle" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a2e6" x="0" y="0" width="555" height="200" radius="10" mode="Transparent">
-					<pen lineWidth="1.5" lineColor="#CCCCCC"/>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a2f7" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
-					<text><![CDATA[History]]></text>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3a8" x="12" y="36" width="136" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Name]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3b9" x="148" y="36" width="70" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Id]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3c0" x="218" y="36" width="60" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Type]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3c1" x="278" y="36" width="50" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Incident]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3ca" x="328" y="36" width="70" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Start]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3db" x="398" y="36" width="70" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[End]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3ef" x="468" y="36" width="75" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
-					<text><![CDATA[Assignee]]></text>
-					<box leftPadding="6" rightPadding="6">
-						<pen lineWidth="0.5" lineColor="#AAAAAA"/>
-					</box>
-				</element>
-				<element kind="component" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3ec" x="12" y="60" width="531" height="128">
-					<component kind="list" printOrder="Vertical">
-						<datasetRun subDataset="historyDataset">
-							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource((java.util.List)((java.util.Map)$P{history}).get("elementInstances"))]]></dataSourceExpression>
-						</datasetRun>
-						<contents height="22" width="531">
-							<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-abcd-ef1234567891" x="0" y="0" width="531" height="22" mode="Opaque" backcolor="#F0F0F0">
-								<pen lineWidth="0.0"/>
-								<printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></printWhenExpression>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4a1" x="0" y="0" width="136" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{elementName}]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4b2" x="136" y="0" width="70" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{elementId}]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4e5" x="206" y="0" width="60" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{type} != null ? $F{type}.toLowerCase() : ""]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4f6" x="266" y="0" width="50" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[Boolean.TRUE.equals($F{hasIncident}) ? "Yes" : "No"]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4c3" x="316" y="0" width="70" height="22" style="Detail" fontSize="7.0" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{startDate} != null ? $F{startDate}.toLowerCase() : ""]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4d4" x="386" y="0" width="70" height="22" style="Detail" fontSize="7.0" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{endDate} != null ? $F{endDate}.toLowerCase() : ""]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-							<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4e6" x="456" y="0" width="75" height="22" style="Detail" textAdjust="StretchHeight">
-								<expression><![CDATA[$F{assignee} != null ? $F{assignee} : ""]]></expression>
-								<box leftPadding="6" rightPadding="6">
-									<pen lineWidth="0.5" lineColor="#DDDDDD"/>
-								</box>
-							</element>
-						</contents>
-					</component>
-				</element>
+			<element kind="rectangle" uuid="a0b1c2d3-e4f5-6789-abcd-ef0123456702" x="0" y="0" width="555" height="84" radius="10" mode="Transparent" stretchType="ContainerBottom">
+				<pen lineWidth="1.5" lineColor="#CCCCCC"/>
+			</element>
+			<element kind="staticText" uuid="f66736a6-ce8d-4188-b638-8811140ed989" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Context]]></text>
+			</element>
+			<element kind="staticText" uuid="26dfee6e-2e70-45f2-b4fa-2007f09989c1" x="12" y="36" width="265" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Name]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="21f30964-7017-45a3-a98e-6908a81bb153" x="277" y="36" width="266" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Value]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="component" uuid="aa11bb22-cc33-dd44-ee55-ff6677880001" x="12" y="60" width="531" height="22">
+				<component kind="list" printOrder="Vertical">
+					<datasetRun subDataset="contextDataset">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(((java.util.Map<String,Object>)$P{context}).entrySet().stream().map(e -> { java.util.Map<String,Object> r = new java.util.HashMap<>(); r.put("name", e.getKey()); r.put("value", e.getValue() != null ? String.valueOf(e.getValue()) : ""); return r; }).collect(java.util.stream.Collectors.toList()))]]></dataSourceExpression>
+					</datasetRun>
+					<contents height="22" width="531">
+						<element kind="textField" uuid="bb22cc33-dd44-ee55-ff66-778899001122" x="0" y="0" width="265" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{name}]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="cc33dd44-ee55-ff66-7788-990011223344" x="265" y="0" width="266" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{value}]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+					</contents>
+				</component>
+			</element>
+		</band>
+		<!-- Gap -->
+		<band height="12" splitType="Stretch"/>
+		<!-- Variables card band — stretches with list content -->
+		<band height="84" splitType="Stretch">
+			<element kind="rectangle" uuid="b1c2d3e4-f5a6-7890-bcde-f01234560001" x="0" y="0" width="555" height="84" radius="10" mode="Opaque" backcolor="#0076AD" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
+			</element>
+			<element kind="rectangle" uuid="bb00cc11-dd22-ee33-ff44-005566770001" x="0" y="30" width="555" height="54" mode="Opaque" backcolor="#FFFFFF" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
+			</element>
+			<element kind="rectangle" uuid="b1c2d3e4-f5a6-7890-bcde-f01234560002" x="0" y="0" width="555" height="84" radius="10" mode="Transparent" stretchType="ContainerBottom">
+				<pen lineWidth="1.5" lineColor="#CCCCCC"/>
+			</element>
+			<element kind="staticText" uuid="921dec64-fdf5-4b54-a595-3e041f0de114" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Variables]]></text>
+			</element>
+			<element kind="staticText" uuid="28d48eb5-ec04-4ffa-b669-421cba857fdd" x="12" y="36" width="265" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Name]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="c3e5a7b9-d1f3-5b7d-9f1b-3d5f7a9c1e3f" x="277" y="36" width="266" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Value]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="component" uuid="d4f6b8ca-e2a4-6c8e-a0c2-4e6a8c0e0001" x="12" y="60" width="531" height="22">
+				<component kind="list" printOrder="Vertical">
+					<datasetRun subDataset="variablesDataset">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(((java.util.Map<String,Object>)$P{variables}).entrySet().stream().map(e -> { java.util.Map<String,Object> r = new java.util.HashMap<>(); r.put("name", e.getKey()); r.put("value", e.getValue() != null ? String.valueOf(e.getValue()) : ""); return r; }).collect(java.util.stream.Collectors.toList()))]]></dataSourceExpression>
+					</datasetRun>
+					<contents height="22" width="531">
+						<element kind="textField" uuid="e5a7c9db-f3b5-7d9f-b1d3-5f7b9d1f0001" x="0" y="0" width="265" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{name}]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="f6b8dace-a4c6-8eaf-c2e4-6a8caef40001" x="265" y="0" width="266" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{value}]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+					</contents>
+				</component>
+			</element>
+		</band>
+		<!-- Gap -->
+		<band height="12" splitType="Stretch"/>
+		<!-- History card band — stretches with list content -->
+		<band height="84" splitType="Stretch">
+			<element kind="rectangle" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f10001" x="0" y="0" width="555" height="84" radius="10" mode="Opaque" backcolor="#0076AD" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
+			</element>
+			<element kind="rectangle" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f10002" x="0" y="30" width="555" height="54" mode="Opaque" backcolor="#FFFFFF" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
+			</element>
+			<element kind="rectangle" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f10003" x="0" y="0" width="555" height="84" radius="10" mode="Transparent" stretchType="ContainerBottom">
+				<pen lineWidth="1.5" lineColor="#CCCCCC"/>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a2f7" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[History]]></text>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3a8" x="12" y="36" width="136" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Name]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3b9" x="148" y="36" width="70" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Id]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3c0" x="218" y="36" width="60" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Type]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3c1" x="278" y="36" width="50" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Incident]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3ca" x="328" y="36" width="70" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Start]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3db" x="398" y="36" width="70" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[End]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a3ef" x="468" y="36" width="75" height="22" mode="Opaque" backcolor="#E8E8E8" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Assignee]]></text>
+				<box leftPadding="6" rightPadding="6">
+					<pen lineWidth="0.5" lineColor="#AAAAAA"/>
+				</box>
+			</element>
+			<element kind="component" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f10004" x="12" y="60" width="531" height="22">
+				<component kind="list" printOrder="Vertical">
+					<datasetRun subDataset="historyDataset">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource((java.util.List)((java.util.Map)$P{history}).get("elementInstances"))]]></dataSourceExpression>
+					</datasetRun>
+					<contents height="22" width="531">
+						<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-abcd-ef1234567891" x="0" y="0" width="531" height="22" mode="Opaque" backcolor="#F0F0F0">
+							<pen lineWidth="0.0"/>
+							<printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></printWhenExpression>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4a1" x="0" y="0" width="136" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{elementName}]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4b2" x="136" y="0" width="70" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{elementId}]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4e5" x="206" y="0" width="60" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{type} != null ? $F{type}.toLowerCase() : ""]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4f6" x="266" y="0" width="50" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[Boolean.TRUE.equals($F{hasIncident}) ? "Yes" : "No"]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4c3" x="316" y="0" width="70" height="22" style="Detail" fontSize="7.0" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{startDate} != null ? $F{startDate}.toLowerCase() : ""]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4d4" x="386" y="0" width="70" height="22" style="Detail" fontSize="7.0" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{endDate} != null ? $F{endDate}.toLowerCase() : ""]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+						<element kind="textField" uuid="e5f6a7b8-c9d0-4e5f-a6b7-c8d9e0f1a4e6" x="456" y="0" width="75" height="22" style="Detail" textAdjust="StretchHeight">
+							<expression><![CDATA[$F{assignee} != null ? $F{assignee} : ""]]></expression>
+							<box leftPadding="6" rightPadding="6">
+								<pen lineWidth="0.5" lineColor="#DDDDDD"/>
+							</box>
+						</element>
+					</contents>
+				</component>
 			</element>
 		</band>
 	</detail>

@@ -122,6 +122,30 @@
       "group": "Input"
     },
     {
+      "id": "includeContext",
+      "label": "Include context",
+      "description": "Include the context (processInstanceKey, processDefinitionKey, name...",
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Yes",
+          "value": "true"
+        },
+        {
+          "name": "No",
+          "value": "false"
+        }
+      ],
+      "binding": {
+        "name": "includeContext",
+        "type": "zeebe:input"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "group": "Input"
+    },
+    {
       "id": "includeProcessHistory",
       "label": "Include history",
       "description": "Include the process instance history. History is accessible in the report (all tasks exectued)",
@@ -161,32 +185,6 @@
       "group": "Input"
     },
     {
-      "id": "destinationJsonStorageDefinition_optional",
-      "label": "Provide JSon Storage Destination?",
-      "description": "Storage Definition in Json.",
-      "value": "false",
-      "binding": {
-        "name": "destinationJsonStorageDefinition_optional",
-        "type": "zeebe:input"
-      },
-      "type": "Dropdown",
-      "choices": [
-        {
-          "name": "Yes",
-          "value": "true"
-        },
-        {
-          "name": "No",
-          "value": "false"
-        }
-      ],
-      "group": "Input"
-    },
-    {
-      "condition": {
-        "property": "destinationJsonStorageDefinition_optional",
-        "equals": "true"
-      },
       "id": "destinationJsonStorageDefinition",
       "label": "JSon Storage Destination",
       "description": "Storage Definition in Json.",
@@ -195,6 +193,9 @@
       "binding": {
         "name": "destinationJsonStorageDefinition",
         "type": "zeebe:input"
+      },
+      "constraints": {
+        "notEmpty": true
       },
       "group": "Input"
     },
