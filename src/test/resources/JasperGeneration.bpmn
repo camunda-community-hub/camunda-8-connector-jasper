@@ -128,7 +128,7 @@
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="c-jasper-function" />
         <zeebe:ioMapping>
-          <zeebe:input source="=&#10;{ &#10;  &#34;storageDefinition&#34;: &#34;FOLDER:C:/dev/intellij/community/connector/camunda-8-connector-jasper/src/test/resources&#34;, &#10;  &#34;content&#34;: &#34;ProcessInstanceReport.jrxml&#34;}" target="jasperReport" />
+          <zeebe:input source="={ &#10;  &#34;storageDefinition&#34;: &#34;URL&#34;, &#10;  &#34;content&#34;: &#34;https://github.com/camunda-community-hub/camunda-8-connector-jasper/raw/main/src/test/resources/ProcessInstanceReport.jrxml&#34;&#10;}&#10;" target="jasperReport" />
           <zeebe:input source="={&#34;customerInfo&#34;: customerInfo,&#10; &#34;creditScore&#34;: creditScore,&#10; &#34;loanInfo&#34;: loanInfo,&#10; &#34;loanAccepted&#34;:loanAccepted,&#10;&#34;loanAcceptanceComment&#34;: loanAcceptanceComment,&#10; &#34;bankInfo&#34;: {&#34;phoneNumber&#34;: &#34;672 233 1323&#34;}&#10;}" target="data" />
           <zeebe:input source="PDF" target="formatExport" />
           <zeebe:input source="true" target="includeContext" />

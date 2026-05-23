@@ -52,12 +52,11 @@ public class JasperFunction implements OutboundConnectorFunction, CherryConnecto
     CamundaClient camundaClient;
 
 
-
     @Override
     public JasperOutput execute(OutboundConnectorContext outboundConnectorContext) throws Exception {
         JasperInput jasperInput;
         try {
-           jasperInput = outboundConnectorContext.bindVariables(JasperInput.class);
+            jasperInput = outboundConnectorContext.bindVariables(JasperInput.class);
         } catch (Exception e) {
             throw new ConnectorException(JasperError.ERROR_BAD_INPUTPARAMETER, "PDFFunction can't bind variable " + e.getMessage() + "]");
         }
@@ -77,6 +76,12 @@ public class JasperFunction implements OutboundConnectorFunction, CherryConnecto
             logger.error("No destination storage definition define ");
             throw new ConnectorException(JasperError.ERROR_NO_DESTINATION_STORAGE_DEFINITION_DEFINE);
         }
+
+        logger.info("Start generation report [{}] for processsInstance[{}] History? {} Context? {} DiagramImage? {}",
+                fileVariable.getName(), outboundConnectorContext.getJobContext().getProcessInstanceKey(),
+                Boolean.TRUE.equals(jasperInput.getIncludeProcessHistory()),
+                Boolean.TRUE.equals(jasperInput.getIncludeContext()),
+                Boolean.TRUE.equals(jasperInput.getIncludeDiagramImage()));
 
 
         Map<String, Object> historyData = new HashMap<>();
@@ -131,8 +136,6 @@ public class JasperFunction implements OutboundConnectorFunction, CherryConnecto
 
 
     }
-
-
 
 
     @Override

@@ -127,7 +127,7 @@ public class HistoryAccess {
                 incidents.add(row);
             }
         } catch (Exception e) {
-            if (!e.getMessage().contains("404: Not Found"))
+            if (!e.getMessage().contains("code 404"))
                 logger.error("Error fetching incidents for processInstanceKey={}: {}", processInstanceKey, e.getMessage());
         }
         return incidents;

@@ -5,7 +5,6 @@ import io.camunda.connector.api.error.ConnectorException;
 import io.camunda.connector.jasper.JasperError;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,24 +25,19 @@ public class DiagramAccess {
         this.camundaClient = camundaClient;
     }
 
-    /**
-     * Returns the BPMN diagram for the given process definition as a PNG byte array.
-     * Returns null on any failure so the caller degrades gracefully.
-     */
     public byte[] getDiagramAsPng(long processDefinitionKey) {
         try {
-            long begnTime = System.currentTimeMillis();
-            logger.info("Start generating diagram...");
+            long begin = System.currentTimeMillis();
             String bpmnXml = fetchBpmnXml(processDefinitionKey);
             if (bpmnXml == null || bpmnXml.isBlank()) {
-                logger.info("Can't fetch BpmnXml");
+                logger.warn("No BPMN XML returned for processDefinitionKey={}", processDefinitionKey);
                 return null;
             }
-            byte[] image = renderToPng(bpmnXml);
-            logger.info("Finished generating diagram in {} ms", System.currentTimeMillis() - begnTime);
-            return image;
+            byte[] png = renderToPng(bpmnXml);
+            logger.info("Diagram generated in {} ms for processDefinitionKey={}", System.currentTimeMillis() - begin, processDefinitionKey);
+            return png;
         } catch (Exception e) {
-            logger.error("Failed to generate diagram for processDefinitionKey={}: {}", processDefinitionKey, e.getMessage());
+            logger.error("Failed to generate diagram for processDefinitionKey={}: {}", processDefinitionKey, e.getMessage(), e);
             return null;
         }
     }
@@ -59,25 +53,30 @@ public class DiagramAccess {
     }
 
     private byte[] renderToPng(String bpmnXml) throws Exception {
-        XMLInputFactory xif = XMLInputFactory.newInstance();
-        // Disable external entity processing to avoid XXE
-        xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
-        xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-        XMLStreamReader xtr = xif.createXMLStreamReader(new StringReader(bpmnXml));
+        try {
+            XMLInputFactory xif = XMLInputFactory.newInstance();
+            xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+            xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+            XMLStreamReader xtr = xif.createXMLStreamReader(new StringReader(bpmnXml));
+            BpmnModel bpmnModel = new BpmnXMLConverter().convertToBpmnModel(xtr);
 
-        BpmnModel bpmnModel = new BpmnXMLConverter().convertToBpmnModel(xtr);
-
-        ProcessDiagramGenerator generator = new DefaultProcessDiagramGenerator();
-        try (InputStream pngStream = generator.generateDiagram(
-                bpmnModel,
-                Collections.emptyList(),   // no highlighted activities
-                Collections.emptyList())) { // no highlighted flows
-            return pngStream.readAllBytes();
+            DefaultProcessDiagramGenerator generator = new DefaultProcessDiagramGenerator();
+            try (InputStream pngStream = generator.generateDiagram(
+                    bpmnModel,
+                    Collections.emptyList(),   // highlighted activities
+                    Collections.emptyList(),   // highlighted flows
+                    "Arial", "Arial", "Arial", // activity / label / annotation fonts
+                    false)) {                  // draw sequence-flow names without label DI
+                return pngStream.readAllBytes();
+            } catch (Exception e) {
+                logger.error("Exception generating Drawing image: {}", e.getMessage());
+                throw new ConnectorException(JasperError.GENERATING_DIAGRAM, "Error " + e.getMessage());
+            } catch (Error e) {
+                logger.error("Error generating Drawing image: {}", e);
+                throw new ConnectorException(JasperError.GENERATING_DIAGRAM, "Error " + e.getMessage());
+            }
         } catch (Exception e) {
             logger.error("Exception generating Drawing image: {}", e.getMessage());
-            throw new ConnectorException(JasperError.GENERATING_DIAGRAM, "Error " + e.getMessage());
-        } catch (Error e) {
-            logger.error("Error generating Drawing image: {}", e);
             throw new ConnectorException(JasperError.GENERATING_DIAGRAM, "Error " + e.getMessage());
         }
     }
