@@ -7,14 +7,21 @@
 
 # Jasper function
 
-Execute a Jasper report.
+From a Jasper report, build your report.
+The connector used FileStorage: the report may be available as a Camunda document, or accessible via a URL or on a Drive.
+Connector provide on demand the context (processInstanceKey, processDefinitionName) and the process diagram.
+
+Jasper can access only limited process variable scope defined by the designer, in order to protect the process
+
 ![JasperGeneration.png](doc/JasperGeneration.png)
 
-A Jasper report is pass as input, using the FileStorage library
 
 This report can be generated
+![LoanAcceptanceExample.png](doc/LoanAcceptanceExample.png)
 
-![img.png](img.png)
+or the ProcessInstanceReport provided in the test folder
+![ProcessInstanceReport.png](doc/ProcessInstanceReport.png)
+
 # Camunda document
 
 ## Use a Camunda document as input
