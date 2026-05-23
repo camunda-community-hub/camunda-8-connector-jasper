@@ -12,7 +12,9 @@ Execute a Jasper report.
 
 A Jasper report is pass as input, using the FileStorage library
 
+This report can be generated
 
+![img.png](img.png)
 # Camunda document
 
 ## Use a Camunda document as input
@@ -124,10 +126,10 @@ It contains the following information:
 | data                             | Data                     | java.lang.Object  | REQUIRED |
 | formatExport                     | Format export            | java.lang.String  | REQUIRED |
 | includeContext                   | Include context          | java.lang.Boolean | REQUIRED |
+| includeDiagramImage              | Include Diagram image    | java.lang.Boolean | REQUIRED |
 | includeProcessHistory            | Include history          | java.lang.Boolean | REQUIRED |
 | destinationFileName              | Destination file name    | java.lang.String  | REQUIRED |
 | destinationJsonStorageDefinition | JSon Storage Destination | java.util.Map     | REQUIRED |
-
 
 
 ### Outputs

@@ -146,6 +146,30 @@
       "group": "Input"
     },
     {
+      "id": "includeDiagramImage",
+      "label": "Include Diagram image",
+      "description": "Generate and inlude the BPMN Diagram image",
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Yes",
+          "value": "true"
+        },
+        {
+          "name": "No",
+          "value": "false"
+        }
+      ],
+      "binding": {
+        "name": "includeDiagramImage",
+        "type": "zeebe:input"
+      },
+      "constraints": {
+        "notEmpty": true
+      },
+      "group": "Input"
+    },
+    {
       "id": "includeProcessHistory",
       "label": "Include history",
       "description": "Include the process instance history. History is accessible in the report (all tasks exectued)",

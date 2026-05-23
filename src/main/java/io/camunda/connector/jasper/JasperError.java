@@ -26,5 +26,7 @@ public class JasperError {
     public static final String ERROR_EXECUTING_JASPER = "ERROR_EXECUTING_JASPER";
     public static final String ERROR_EXECUTING_JASPER_LABEL = "Error executing Jasper report";
 
+    public static final String GENERATING_DIAGRAM = "GENERATING_DIAGRAM";
+    public static final String GENERATING_DIAGRAM_LABEL = "Generating BPMN Diagram";
 
 }

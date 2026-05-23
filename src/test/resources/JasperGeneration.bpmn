@@ -98,6 +98,7 @@
           <zeebe:input source="={&#34;customerInfo&#34;: customerInfo,&#10; &#34;creditScore&#34;: creditScore,&#10; &#34;loanInfo&#34;: loanInfo,&#10; &#34;loanAccepted&#34;:loanAccepted,&#10;&#34;loanAcceptanceComment&#34;: loanAcceptanceComment,&#10; &#34;bankInfo&#34;: {&#34;phoneNumber&#34;: &#34;672 233 1323&#34;}}" target="data" />
           <zeebe:input source="PDF" target="formatExport" />
           <zeebe:input source="false" target="includeContext" />
+          <zeebe:input source="false" target="includeDiagramImage" />
           <zeebe:input source="false" target="includeProcessHistory" />
           <zeebe:input source="=&#34;ProcessInstanceReport.pdf&#34;" target="destinationFileName" />
           <zeebe:input source="={ &#34;type&#34;: &#34;CAMUNDA&#34;}" target="destinationJsonStorageDefinition" />
@@ -127,11 +128,11 @@
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="c-jasper-function" />
         <zeebe:ioMapping>
-          <zeebe:input source="true" target="destinationJsonStorageDefinition_optional" />
           <zeebe:input source="=&#10;{ &#10;  &#34;storageDefinition&#34;: &#34;FOLDER:C:/dev/intellij/community/connector/camunda-8-connector-jasper/src/test/resources&#34;, &#10;  &#34;content&#34;: &#34;ProcessInstanceReport.jrxml&#34;}" target="jasperReport" />
           <zeebe:input source="={&#34;customerInfo&#34;: customerInfo,&#10; &#34;creditScore&#34;: creditScore,&#10; &#34;loanInfo&#34;: loanInfo,&#10; &#34;loanAccepted&#34;:loanAccepted,&#10;&#34;loanAcceptanceComment&#34;: loanAcceptanceComment,&#10; &#34;bankInfo&#34;: {&#34;phoneNumber&#34;: &#34;672 233 1323&#34;}&#10;}" target="data" />
           <zeebe:input source="PDF" target="formatExport" />
           <zeebe:input source="true" target="includeContext" />
+          <zeebe:input source="true" target="includeDiagramImage" />
           <zeebe:input source="true" target="includeProcessHistory" />
           <zeebe:input source="=&#34;ProcessInstanceReport.pdf&#34;" target="destinationFileName" />
           <zeebe:input source="={ &#34;type&#34;: &#34;CAMUNDA&#34;}" target="destinationJsonStorageDefinition" />
@@ -148,7 +149,7 @@
     <bpmn:boundaryEvent id="Event_126470m" name="30s" attachedToRef="Activity_0iwqxyw">
       <bpmn:outgoing>Flow_156pk4a</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_03wwk56">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30S</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT3S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_03jegks" sourceRef="StartEvent_1" targetRef="Activity_0jgchuk" />
@@ -192,6 +193,22 @@
       <bpmndi:BPMNShape id="Activity_0kurqhn_di" bpmnElement="Activity_1odcw2f">
         <dc:Bounds x="870" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zaycvk_di" bpmnElement="Activity_12s7z2r" isExpanded="true">
+        <dc:Bounds x="1140" y="510" width="710" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jvrbpr_di" bpmnElement="Event_1pmvp1r">
+        <dc:Bounds x="1180" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1192" y="635" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_04w8oab_di" bpmnElement="Event_04w8oab">
+        <dc:Bounds x="1632" y="592" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0judoqm_di" bpmnElement="Flow_0judoqm">
+        <di:waypoint x="1216" y="610" />
+        <di:waypoint x="1632" y="610" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1tht7w2_di" bpmnElement="Event_1tht7w2">
         <dc:Bounds x="1832" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -210,22 +227,6 @@
         <dc:Bounds x="1400" y="300" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0zaycvk_di" bpmnElement="Activity_12s7z2r" isExpanded="true">
-        <dc:Bounds x="1140" y="510" width="710" height="200" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1jvrbpr_di" bpmnElement="Event_1pmvp1r">
-        <dc:Bounds x="1180" y="592" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1192" y="635" width="13" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_04w8oab_di" bpmnElement="Event_04w8oab">
-        <dc:Bounds x="1632" y="592" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0judoqm_di" bpmnElement="Flow_0judoqm">
-        <di:waypoint x="1216" y="610" />
-        <di:waypoint x="1632" y="610" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1tg7ltp_di" bpmnElement="Event_126470m">
         <dc:Bounds x="632" y="362" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -292,18 +293,6 @@
         <dc:Bounds x="500" y="160" width="560" height="60" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0tatwoo_di" bpmnElement="Association_0tatwoo">
-        <di:waypoint x="1153" y="380" />
-        <di:waypoint x="1181" y="430" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0l4zdkw_di" bpmnElement="Association_0l4zdkw">
-        <di:waypoint x="666" y="510" />
-        <di:waypoint x="674" y="530" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_04leixw_di" bpmnElement="Association_04leixw">
-        <di:waypoint x="1479" y="380" />
-        <di:waypoint x="1509" y="420" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1t0ymhs_di" bpmnElement="TextAnnotation_1t0ymhs">
         <dc:Bounds x="630" y="530" width="230" height="84" />
         <bpmndi:BPMNLabel />
@@ -316,9 +305,17 @@
         <dc:Bounds x="1470" y="420" width="200" height="41" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0vfss80_di" bpmnElement="Flow_0vfss80">
+        <di:waypoint x="1130" y="300" />
+        <di:waypoint x="1130" y="140" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1qn1e27_di" bpmnElement="Flow_1qn1e27">
         <di:waypoint x="1710" y="140" />
         <di:waypoint x="1710" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ubjoux_di" bpmnElement="Flow_1ubjoux">
+        <di:waypoint x="1450" y="300" />
+        <di:waypoint x="1450" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12cq2h6_di" bpmnElement="Flow_12cq2h6">
         <di:waypoint x="850" y="220" />
@@ -326,19 +323,23 @@
         <di:waypoint x="1110" y="260" />
         <di:waypoint x="1110" y="300" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0vfss80_di" bpmnElement="Flow_0vfss80">
-        <di:waypoint x="1130" y="300" />
-        <di:waypoint x="1130" y="140" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0s10env_di" bpmnElement="Flow_0s10env">
         <di:waypoint x="1051" y="220" />
         <di:waypoint x="1051" y="240" />
         <di:waypoint x="1430" y="240" />
         <di:waypoint x="1430" y="300" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ubjoux_di" bpmnElement="Flow_1ubjoux">
-        <di:waypoint x="1450" y="300" />
-        <di:waypoint x="1450" y="140" />
+      <bpmndi:BPMNEdge id="Association_0l4zdkw_di" bpmnElement="Association_0l4zdkw">
+        <di:waypoint x="666" y="510" />
+        <di:waypoint x="674" y="530" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0tatwoo_di" bpmnElement="Association_0tatwoo">
+        <di:waypoint x="1153" y="380" />
+        <di:waypoint x="1181" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_04leixw_di" bpmnElement="Association_04leixw">
+        <di:waypoint x="1479" y="380" />
+        <di:waypoint x="1509" y="420" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -27,6 +27,7 @@ public class JasperInput implements CherryInput {
     public static final String FORMAT_EXPORT = "formatExport";
     public static final String INCLUDE_PROCESS_HISTORY = "includeProcessHistory";
     public static final String INCLUDE_CONTEXT = "includeContext";
+    public static final String INCLUDE_DIAGRAM_IMAGE = "includeDiagramImage";
     public static final String DESTINATION_FILE_NAME = "destinationFileName";
     public static final String DESTINATION_JSONSTORAGEDEFINITION = "destinationJsonStorageDefinition";
 
@@ -80,6 +81,15 @@ public class JasperInput implements CherryInput {
             "Include the context (processInstanceKey, processDefinitionKey, name...")
             .addChoice(Boolean.TRUE.toString(), "Yes")
             .addChoice(Boolean.FALSE.toString(), "No");
+    public static final RunnerParameter jasperParameterIncludeDiagramImage = new RunnerParameter(
+            JasperInput.INCLUDE_DIAGRAM_IMAGE,
+            // name
+            "Include Diagram image", // label
+            Boolean.class, // class
+            RunnerParameter.Level.REQUIRED, // level
+            "Generate and inlude the BPMN Diagram image")
+            .addChoice(Boolean.TRUE.toString(), "Yes")
+            .addChoice(Boolean.FALSE.toString(), "No");
     public static final RunnerParameter jasperParameterDestinationFileName = new RunnerParameter(
             JasperInput.DESTINATION_FILE_NAME,
             // name
@@ -94,11 +104,13 @@ public class JasperInput implements CherryInput {
             RunnerParameter.Level.REQUIRED, // level
             "Storage Definition in Json.");
 
+
     public static List<RunnerParameter> runnerParametersCollectList = List.of(
             jasperParameterJasperReport,
             jasperParameterData,
             jasperParameterFormatExport,
             jasperParameterIncludeContext,
+            jasperParameterIncludeDiagramImage,
             jasperParameterIncludeHistory,
             jasperParameterDestinationFileName,
             jasperParameterDestinationJsonStorageDefinition);
@@ -115,6 +127,8 @@ public class JasperInput implements CherryInput {
     private Boolean includeProcessHistory;
 
     private Boolean includeContext;
+
+    private Boolean includeDiagramImage;
 
     private String formatExport;
 
@@ -153,6 +167,9 @@ public class JasperInput implements CherryInput {
 
     public Boolean getIncludeContext() {
         return includeContext;
+    }
+    public Boolean getIncludeDiagramImage() {
+        return includeDiagramImage;
     }
 
     @JsonIgnore

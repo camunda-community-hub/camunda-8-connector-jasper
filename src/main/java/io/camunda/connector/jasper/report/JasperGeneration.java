@@ -15,12 +15,19 @@ import net.sf.jasperreports.pdf.JRPdfExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class JasperGeneration {
+
+    private static final ConcurrentHashMap<String, JasperReport> COMPILED_REPORT_CACHE = new ConcurrentHashMap<>();
 
     private final Logger logger = LoggerFactory.getLogger(JasperGeneration.class.getName());
 
@@ -28,7 +35,8 @@ public class JasperGeneration {
                                           InputStream jrxmlStream,
                                           Map<String, Object> processVariablesData,
                                           Map<String, Object> contextData,
-                                          Map<String, Object> historyData
+                                          Map<String, Object> historyData,
+                                          Map<String,Object> imagesData
     )
             throws ConnectorException {
         long begin = System.currentTimeMillis();
@@ -36,7 +44,21 @@ public class JasperGeneration {
         try {
             logger.info("[{}] compilation started...", jrxmlName);
             analysis += " compilation started...";
-            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
+            byte[] jrxmlBytes = jrxmlStream.readAllBytes();
+            String cacheKey = contentHash(jrxmlBytes);
+            JasperReport jasperReport = COMPILED_REPORT_CACHE.get(cacheKey);
+            if (jasperReport == null) {
+                synchronized (COMPILED_REPORT_CACHE) {
+                    jasperReport = COMPILED_REPORT_CACHE.get(cacheKey);
+                    if (jasperReport == null) {
+                        logger.info("[{}] cache miss (hash={}), compiling...", jrxmlName, cacheKey.substring(0, 8));
+                        jasperReport = JasperCompileManager.compileReport(new ByteArrayInputStream(jrxmlBytes));
+                        COMPILED_REPORT_CACHE.put(cacheKey, jasperReport);
+                    }
+                }
+            } else {
+                logger.info("[{}] using cached compiled report (hash={})", jrxmlName, cacheKey.substring(0, 8));
+            }
             long endCompilation = System.currentTimeMillis();
 
             logger.info("[{}] fill report started...", jrxmlName);
@@ -45,6 +67,8 @@ public class JasperGeneration {
             reportData.put("variables", processVariablesData);
             reportData.put("context", contextData);
             reportData.put("history", historyData);
+            reportData.put("images", imagesData);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportData, new JREmptyDataSource());
             long endFillReport = System.currentTimeMillis();
 
@@ -85,10 +109,20 @@ public class JasperGeneration {
             logger.error("Generate Jasper {} processVariablesData[{}] ContextData[{}] HistoryData[{}]:  ",
                     analysis,
                     processVariablesData,
+                    contextData,
                     historyData, e);
             throw new ConnectorException(JasperError.ERROR_EXECUTING_JASPER, e.getMessage());
         }
 
+    }
+
+    private static String contentHash(byte[] content) {
+        try {
+            byte[] digest = MessageDigest.getInstance("SHA-256").digest(content);
+            return HexFormat.of().formatHex(digest);
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 unavailable", e);
+        }
     }
 
     public enum FORMAT {

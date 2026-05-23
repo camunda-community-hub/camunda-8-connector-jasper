@@ -113,6 +113,43 @@
         <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jasperreports-ods</artifactId><version>7.0.6</version></dependency>
         -->
 
+        <!-- BPMN diagram rendering: parse XML → BpmnModel, generate PNG directly -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-image-generator</artifactId>
+            <version>7.1.0.M6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-bpmn-converter</artifactId>
+            <version>7.1.0.M6</version>
+        </dependency>
+        <!-- Batik: force all to 1.19 to match JasperReports.
+             activiti-image-generator pulls batik-svggen/batik-dom at 1.10, which reference
+             org.apache.batik.util.XMLConstants — a class removed in Batik 1.17+.
+             Forcing 1.19 here replaces those 1.10 JARs so the 1.19 code runs instead
+             (1.19 code was compiled without XMLConstants and doesn't reference it). -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-codec</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-svggen</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-dom</artifactId>
+            <version>1.19</version>
+        </dependency>
+
         <!-- test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

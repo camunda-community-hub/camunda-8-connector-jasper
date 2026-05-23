@@ -16,6 +16,7 @@ import io.camunda.connector.api.outbound.OutboundConnectorFunction;
 import io.camunda.connector.cherrytemplate.CherryConnector;
 import io.camunda.connector.jasper.report.JasperGeneration;
 import io.camunda.connector.jasper.service.ContextAccess;
+import io.camunda.connector.jasper.service.DiagramAccess;
 import io.camunda.connector.jasper.service.HistoryAccess;
 import io.camunda.filestorage.FileRepoFactory;
 import io.camunda.filestorage.FileVariable;
@@ -38,6 +39,7 @@ import java.util.Map;
         JasperInput.DATA,
         JasperInput.DESTINATION_FILE_NAME,
         JasperInput.DESTINATION_JSONSTORAGEDEFINITION,
+        JasperInput.INCLUDE_DIAGRAM_IMAGE,
         JasperInput.INCLUDE_PROCESS_HISTORY,
         JasperInput.INCLUDE_CONTEXT}, type = "c-jasper-function")
 
@@ -49,12 +51,7 @@ public class JasperFunction implements OutboundConnectorFunction, CherryConnecto
     @Autowired
     CamundaClient camundaClient;
 
-/*
-    public JasperFunction(CamundaClient camundaClient) {
-        this.camundaClient = camundaClient;
-    }
 
- */
 
     @Override
     public JasperOutput execute(OutboundConnectorContext outboundConnectorContext) throws Exception {
@@ -93,6 +90,12 @@ public class JasperFunction implements OutboundConnectorFunction, CherryConnecto
             contextData = contextAccess.getContext(outboundConnectorContext);
         }
 
+        Map<String, Object> imagesData = new HashMap<>();
+        if (Boolean.TRUE.equals(jasperInput.getIncludeDiagramImage())) {
+            DiagramAccess diagramAccess = new DiagramAccess(camundaClient);
+            long processDefinitionKey = outboundConnectorContext.getJobContext().getProcessDefinitionKey();
+            imagesData.put("diagramImage", diagramAccess.getDiagramAsPng(processDefinitionKey));
+        }
 
         // ---------- generate report
         JasperGeneration.FORMAT format = jasperInput.getFormatExport();
@@ -102,7 +105,8 @@ public class JasperFunction implements OutboundConnectorFunction, CherryConnecto
                 fileVariable.getValueStream(),
                 jasperInput.getData(),
                 contextData,
-                historyData);
+                historyData,
+                imagesData);
 
         // save the result
         try {

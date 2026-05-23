@@ -30,6 +30,7 @@
 	<parameter name="variables" class="java.util.Map"/>
 	<parameter name="context" class="java.util.Map"/>
 	<parameter name="history" class="java.util.Map"/>
+	<parameter name="images" class="java.util.Map"/>
 	<background splitType="Stretch"/>
 	<title height="126" splitType="Stretch">
 		<element kind="image" uuid="ddc15723-2728-421f-b95e-2df9faf64ce1" x="0" y="0" width="164" height="126">
@@ -259,6 +260,39 @@
 						</element>
 					</contents>
 				</component>
+			</element>
+		</band>
+		<!-- Gap before diagram -->
+		<band height="12" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
+		</band>
+		<!-- Diagram card band -->
+		<band height="340" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
+			<!-- Blue header background -->
+			<element kind="rectangle" uuid="d1e2f3a4-b5c6-7890-cdef-012345678901" x="0" y="0" width="555" height="340" radius="10" mode="Opaque" backcolor="#0076AD" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
+				<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
+			</element>
+			<!-- White body -->
+			<element kind="rectangle" uuid="d1e2f3a4-b5c6-7890-cdef-012345678902" x="0" y="30" width="555" height="310" mode="Opaque" backcolor="#FFFFFF" stretchType="ContainerBottom">
+				<pen lineWidth="0.0"/>
+				<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
+			</element>
+			<!-- Rounded border -->
+			<element kind="rectangle" uuid="d1e2f3a4-b5c6-7890-cdef-012345678903" x="0" y="0" width="555" height="340" radius="10" mode="Transparent" stretchType="ContainerBottom">
+				<pen lineWidth="1.5" lineColor="#CCCCCC"/>
+				<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
+			</element>
+			<!-- Card title -->
+			<element kind="staticText" uuid="d1e2f3a4-b5c6-7890-cdef-012345678904" x="0" y="0" width="555" height="30" fontSize="13.0" bold="true" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Diagram]]></text>
+				<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
+			</element>
+			<!-- BPMN diagram image -->
+			<element kind="image" uuid="d1e2f3a4-b5c6-7890-cdef-012345678905" x="12" y="38" width="531" height="294" scaleImage="RetainShape" hImageAlign="Center" onErrorType="Blank">
+				<expression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null ? new java.io.ByteArrayInputStream((byte[])((java.util.Map)$P{images}).get("diagramImage")) : null]]></expression>
+				<printWhenExpression><![CDATA[$P{images} != null && ((java.util.Map)$P{images}).get("diagramImage") != null]]></printWhenExpression>
 			</element>
 		</band>
 	</detail>
