@@ -4,11 +4,12 @@
 
     <name>jasper</name>
     <description>Jasper report</description>
-    <groupId>io.camunda.connector</groupId>
-    <artifactId>jasper-function</artifactId>
+    <groupId>org.camunda.connector</groupId>
+    <artifactId>connector-jasper-function</artifactId>
     <packaging>jar</packaging>
     <!-- 1.0.0 First release -->
-    <version>1.0.0</version>
+    <!-- 1.1.0 normalize groupId and artifactId -->
+    <version>1.1.0</version>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
@@ -221,12 +222,155 @@
             </resource>
         </resources>
         <plugins>
+            <!-- spring-boot-starter-parent auto-binds spring-boot-maven-plugin's "repackage" goal
+                 to the package phase, which fat-ifies the main artifact and renames the original
+                 thin jar to original-*.jar - independently of, and conflicting with, the
+                 with-dependencies shade execution below. Disable it so the plain jar stays
+                 untouched (own classes only). The mainClass config is kept since it is harmless
+                 and documents the local-runtime entry point. -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>io.camunda.connector.jasper.ConnectorApplication</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <!-- spring-boot-starter-parent also pre-configures an unnamed ("default")
+                         execution of this same plugin bound to the package phase, which repackages
+                         the main jar into a Spring-Boot-style fat jar. Disable it so it doesn't
+                         fight with "with-dependencies" below and fat-ify the plain jar. -->
+                    <execution>
+                        <id>default</id>
+                        <phase>none</phase>
+                    </execution>
+                    <!-- "with-dependencies": the deployable jar, uploaded to a Connector Runtime or Cherry.
+                         Those hosts already provide Spring Boot + the whole Camunda connector/client/FEEL
+                         stack, so this excludes all of that by groupId - but keeps JasperReports' own
+                         (large) dependency tree (iText/OpenPDF, Batik, commons-collections4/beanutils2,
+                         Groovy-free XML/JSON data adapters, activiti BPMN diagram rendering, ...) plus
+                         filestorage's own CMIS/Google Drive libraries, since the host does NOT supply
+                         those. A few groupIds are used by BOTH sides (e.g. com.google.http-client,
+                         com.google.guava, io.opencensus, the old-style org.apache.httpcomponents v4 vs
+                         Camunda's v5 .client5/.core5, and jackson-dataformat-xml/datatype-jsr310 needed
+                         by JasperReports/filestorage vs the classic jackson-core/databind needed only by
+                         the Camunda client) - those are deliberately left bundled rather than excluded,
+                         to avoid silently breaking JasperReports report generation or filestorage's
+                         CMIS/Google Drive support for a moderate amount of extra size. -->
+                    <execution>
+                        <id>with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedClassifierName>with-dependencies</shadedClassifierName>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <artifactSet>
+                                <excludes>
+                                    <!-- Camunda connector/client/FEEL stack.
+                                         NOT a groupId wildcard for io.camunda.connector: this project's OWN
+                                         groupId is also io.camunda.connector (same as the host SDK), so a
+                                         blanket io.camunda.connector:* exclude would also strip this
+                                         project's own compiled classes out of the jar (confirmed empirically -
+                                         verify with: unzip -l target/*-with-dependencies.jar | grep <own pkg>).
+                                         Exclude only the specific host SDK artifactIds instead. -->
+                                    <exclude>io.camunda.connector:connector-core</exclude>
+                                    <exclude>io.camunda.connector:connector-runtime-core</exclude>
+                                    <exclude>io.camunda.connector:connector-runtime-spring</exclude>
+                                    <exclude>io.camunda.connector:connector-utils</exclude>
+                                    <exclude>io.camunda.connector:connector-validation</exclude>
+                                    <exclude>io.camunda.connector:connector-object-mapper</exclude>
+                                    <exclude>io.camunda.connector:connector-feel-wrapper</exclude>
+                                    <exclude>io.camunda.connector:jackson-datatype-document</exclude>
+                                    <exclude>io.camunda.connector:jackson-datatype-feel</exclude>
+                                    <exclude>io.camunda.connector:element-template-generator-core</exclude>
+                                    <exclude>io.camunda.connector:http-client</exclude>
+                                    <exclude>io.camunda.connector:spring-boot-starter-camunda-connectors</exclude>
+                                    <exclude>io.camunda:*</exclude>
+                                    <exclude>org.camunda.feel:*</exclude>
+                                    <exclude>org.camunda.bpm.model:*</exclude>
+                                    <!-- Spring Boot / Spring Framework -->
+                                    <exclude>org.springframework.boot:*</exclude>
+                                    <exclude>org.springframework:*</exclude>
+                                    <exclude>ch.qos.logback:*</exclude>
+                                    <exclude>org.apache.logging.log4j:*</exclude>
+                                    <exclude>org.slf4j:*</exclude>
+                                    <exclude>org.apache.tomcat.embed:*</exclude>
+                                    <exclude>io.micrometer:*</exclude>
+                                    <exclude>org.jspecify:*</exclude>
+                                    <exclude>org.hibernate.validator:*</exclude>
+                                    <exclude>org.jboss.logging:*</exclude>
+                                    <exclude>com.fasterxml:classmate</exclude>
+                                    <exclude>org.yaml:*</exclude>
+                                    <exclude>jakarta.annotation:*</exclude>
+                                    <exclude>jakarta.validation:*</exclude>
+                                    <!-- gRPC (Zeebe gateway transport); Netty is NOT excluded: in this
+                                         project's tree it is only pulled in transitively by io.grpc via
+                                         grpc-netty, so excluding io.grpc already removes the need for it,
+                                         but Netty classes are left bundled here as a safety margin rather
+                                         than risk stripping something else that resolves to the same jar. -->
+                                    <exclude>io.grpc:*</exclude>
+                                    <exclude>com.google.protobuf:*</exclude>
+                                    <exclude>com.google.api.grpc:*</exclude>
+                                    <exclude>com.google.j2objc:*</exclude>
+                                    <exclude>com.google.auto.value:*</exclude>
+                                    <exclude>com.google.api:api-common</exclude>
+                                    <exclude>javax.annotation:javax.annotation-api</exclude>
+                                    <exclude>org.codehaus.mojo:animal-sniffer-annotations</exclude>
+                                    <!-- Camunda's OWN http-client transport only (v5) - NOT the v4
+                                         org.apache.httpcomponents (no suffix) that filestorage's
+                                         google-api-client needs, which stays bundled. -->
+                                    <exclude>org.apache.httpcomponents.client5:*</exclude>
+                                    <exclude>org.apache.httpcomponents.core5:*</exclude>
+                                    <!-- Jackson - classic 2.x core/annotations/databind are used only by
+                                         camunda-client-java / connector-object-mapper (host-provided via
+                                         the Camunda client stack). jackson-dataformat-xml (+ its own
+                                         stax2-api / woodstox-core transitive deps) is NOT excluded: it is
+                                         JasperReports' own dependency for XML-sourced reports, and the
+                                         host does not supply it. jackson-datatype-jsr310 is also NOT
+                                         excluded: filestorage needs it directly. Only
+                                         jackson-dataformat-yaml (camunda-client-java's own dep) and
+                                         jackson-datatype-jdk8 / jackson-module-scala (connector tooling /
+                                         FEEL engine only) are excluded. -->
+                                    <exclude>com.fasterxml.jackson.core:*</exclude>
+                                    <exclude>com.fasterxml.jackson.dataformat:jackson-dataformat-yaml</exclude>
+                                    <exclude>com.fasterxml.jackson.datatype:jackson-datatype-jdk8</exclude>
+                                    <exclude>com.fasterxml.jackson.module:*</exclude>
+                                    <exclude>com.fasterxml.uuid:*</exclude>
+                                    <!-- Scala (FEEL engine) -->
+                                    <exclude>org.scala-lang:*</exclude>
+                                    <exclude>com.lihaoyi:*</exclude>
+                                    <!-- Misc transitive libraries used only by the Camunda/Spring stack,
+                                         or by element-template-generator-core (build/test tooling, not
+                                         needed by the connector at runtime). commons-lang3 is excluded by
+                                         exact artifact, NOT the whole org.apache.commons groupId: unlike
+                                         the pdf connector, JasperReports here directly needs
+                                         commons-collections4 and commons-beanutils2 at runtime, so a
+                                         blanket org.apache.commons:* exclude would break report
+                                         generation. -->
+                                    <exclude>com.auth0:*</exclude>
+                                    <exclude>dev.failsafe:*</exclude>
+                                    <exclude>io.pebbletemplates:*</exclude>
+                                    <exclude>net.steppschuh.markdowngenerator:*</exclude>
+                                    <exclude>org.apache.commons:commons-lang3</exclude>
+                                    <exclude>org.bouncycastle:*</exclude>
+                                    <exclude>org.unbescape:*</exclude>
+                                    <exclude>uk.co.jemos.podam:*</exclude>
+                                </excludes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -289,5 +433,50 @@
         </pluginRepository>
     </pluginRepositories>
 
+
+    <profiles>
+        <!-- This project has no .github/workflows release pipeline today, so this profile is never
+             activated automatically. It's added anyway so that if/when a release pipeline is added
+             using the standard community-action-maven-release action (its default release-profile
+             id - see involvedusers' deploy.yml for the working reference), the with-dependencies
+             shade execution is already correctly scoped out of the Central release from day one. -->
+        <profile>
+            <id>community-action-maven-release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>with-dependencies</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
