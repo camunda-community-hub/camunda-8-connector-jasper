@@ -9,7 +9,8 @@
     <packaging>jar</packaging>
     <!-- 1.0.0 First release -->
     <!-- 1.1.0 normalize groupId and artifactId -->
-    <version>1.1.0</version>
+    <!-- 1.2.0 Use connectorSDK and move to 8.10 -->
+    <version>1.2.0</version>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
@@ -19,7 +20,7 @@
 
         <!-- connector SDK version -->
         <!-- connector SDK version 8.9.0 — bumped for getRootProcessInstanceKey() in camunda-client-java -->
-        <version.connector>8.9.0</version.connector>
+        <version.connector>8.10.0</version.connector>
         <version.filestorage>2.5.1</version.filestorage>
 
         <!-- external libraries -->
@@ -33,26 +34,27 @@
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
-    <!-- Push the library to Maven -->
-    <!-- Visit https://github.com/camunda-community-hub/community-action-maven-release -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.5</version>
-    </parent>
 
+    <parent>
+        <groupId>org.camunda.community</groupId>
+        <artifactId>community-hub-release-parent</artifactId>
+        <version>2.1.1</version>
+    </parent>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>io.camunda.connector</groupId>
+            <artifactId>connector-core</artifactId>
+            <version>${version.connector}</version>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>io.camunda.connector</groupId>
-            <artifactId>spring-boot-starter-camunda-connectors</artifactId>
+            <artifactId>connector-validation</artifactId>
             <version>${version.connector}</version>
+            <scope>provided</scope>
         </dependency>
+
 
         <dependency>
             <groupId>io.camunda.filestorage</groupId>
